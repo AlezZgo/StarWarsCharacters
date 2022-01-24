@@ -1,4 +1,4 @@
-package com.example.starwarscharacters.ui.favourites
+package com.example.starwarscharacters.presentation.ui.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater

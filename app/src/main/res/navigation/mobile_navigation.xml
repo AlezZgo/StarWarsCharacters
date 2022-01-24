@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_characters"
-        android:name="com.example.starwarscharacters.ui.characters.CharactersFragment"
+        android:name="com.example.starwarscharacters.presentation.ui.characters.CharactersFragment"
         android:label="@string/title_characters"
         tools:layout="@layout/fragment_characters" />
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="com.example.starwarscharacters.ui.favourites.FavouritesFragment"
+        android:name="com.example.starwarscharacters.presentation.ui.favourites.FavouritesFragment"
         android:label="@string/title_favourites"
         tools:layout="@layout/fragment_favourites" />
 

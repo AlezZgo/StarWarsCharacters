@@ -1,4 +1,4 @@
-package com.example.starwarscharacters.ui.characters
+package com.example.starwarscharacters.presentation.ui.characters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,10 +30,6 @@ class CharactersFragment : Fragment() {
         _binding = FragmentCharactersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        charactersViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
         return root
     }
 
