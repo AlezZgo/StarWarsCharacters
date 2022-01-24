@@ -3,18 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_characters">
+    app:startDestination="@id/descriptionFragment">
 
     <fragment
         android:id="@+id/navigation_characters"
         android:name="com.example.starwarscharacters.presentation.ui.characters.CharactersFragment"
         android:label="@string/title_characters"
-        tools:layout="@layout/fragment_characters" />
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_navigation_characters_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favourites"
         android:name="com.example.starwarscharacters.presentation.ui.favourites.FavouritesFragment"
         android:label="@string/title_favourites"
-        tools:layout="@layout/fragment_favourites" />
+        tools:layout="@layout/fragment_favourites" >
+        <action
+            android:id="@+id/action_navigation_favourites_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="com.example.starwarscharacters.presentation.ui.description.DescriptionFragment"
+        android:label="description_fragment"
+        tools:layout="@layout/description_fragment" />
 
 </navigation>
