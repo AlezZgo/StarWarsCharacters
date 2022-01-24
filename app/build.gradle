@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+
 }
 
 android {
@@ -57,5 +58,11 @@ dependencies {
 
     implementation 'com.google.dagger:dagger:2.35.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.35.1'
+
+    implementation("androidx.room:room-runtime:2.4.1")
+    annotationProcessor("androidx.room:room-compiler:2.4.1")
+
+
+
 
 }
