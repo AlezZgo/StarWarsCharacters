@@ -9,11 +9,11 @@ import androidx.room.Query
 @Dao
 interface CharacterDao {
     @Query("SELECT * FROM characters ORDER BY height DESC")
-    fun getCharacterList(): LiveData<List<CharacterDbModel>>
+    fun getCharacterList(): LiveData<List<CharacterInfoDbModel>>
 
     @Query("SELECT * FROM characters WHERE name == :name LIMIT 1")
-    fun getCharacter(name: String): LiveData<CharacterDbModel>
+    fun getCharacter(name: String): LiveData<CharacterInfoDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(priceList: List<CharacterDbModel>)
+    suspend fun insert(priceList: List<CharacterInfoDbModel>)
 }

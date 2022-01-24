@@ -1,10 +1,9 @@
 package com.example.starwarscharacters.domain
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 
 interface CharactersRepository {
-    fun getCharacter(name:String): LiveData<Character>
+    fun getCharacter(name:String): LiveData<CharacterInfo>
 
-    fun getCharacterList(): LiveData<List<Character>>
+    fun getCharacterList(): LiveData<List<CharacterInfo>>
 }
