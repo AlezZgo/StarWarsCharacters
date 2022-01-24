@@ -11,28 +11,25 @@ import com.example.starwarscharacters.databinding.FragmentCharactersBinding
 class CharactersFragment : Fragment() {
 
     private lateinit var charactersViewModel: CharactersViewModel
-    private var _binding: FragmentCharactersBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private var _binding: FragmentCharactersBinding? = null
+    private val binding: FragmentCharactersBinding
+        get() = _binding ?: throw RuntimeException("FragmentCharactersBinding is null ")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        charactersViewModel =
-            ViewModelProvider(this).get(CharactersViewModel::class.java)
-
+    ): View {
         _binding = FragmentCharactersBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        charactersViewModel =
+            ViewModelProvider(this)[CharactersViewModel::class.java]
     }
 }

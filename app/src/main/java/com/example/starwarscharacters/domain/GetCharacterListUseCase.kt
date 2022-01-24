@@ -1,8 +1,7 @@
 package com.example.starwarscharacters.domain
 
 class GetCharacterListUseCase(
-    private val repository: CharactersRepository,
-    private val filter: String
+    private val repository: CharactersRepository
 ) {
-    operator fun invoke() = repository.getCharacterList(filter)
+    operator fun invoke() = repository.getCharacterList()
 }
