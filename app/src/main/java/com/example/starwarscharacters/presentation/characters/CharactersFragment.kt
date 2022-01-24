@@ -1,19 +1,17 @@
-package com.example.starwarscharacters.presentation.ui.favourites
+package com.example.starwarscharacters.presentation.characters
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.starwarscharacters.databinding.FragmentFavouritesBinding
+import com.example.starwarscharacters.databinding.FragmentCharactersBinding
 
-class FavouritesFragment : Fragment() {
+class CharactersFragment : Fragment() {
 
-    private lateinit var favouritesViewModel: FavouritesViewModel
-    private var _binding: FragmentFavouritesBinding? = null
+    private lateinit var charactersViewModel: CharactersViewModel
+    private var _binding: FragmentCharactersBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,12 +22,11 @@ class FavouritesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        favouritesViewModel =
-            ViewModelProvider(this).get(FavouritesViewModel::class.java)
+        charactersViewModel =
+            ViewModelProvider(this).get(CharactersViewModel::class.java)
 
-        _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
+        _binding = FragmentCharactersBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
 
         return root
     }

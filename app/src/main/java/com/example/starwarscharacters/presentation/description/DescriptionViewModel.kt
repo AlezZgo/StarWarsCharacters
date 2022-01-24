@@ -1,4 +1,4 @@
-package com.example.starwarscharacters.presentation.ui.description
+package com.example.starwarscharacters.presentation.description
 
 import androidx.lifecycle.ViewModel
 
