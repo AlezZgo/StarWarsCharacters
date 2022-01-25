@@ -6,12 +6,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.data.mapper.CharacterMapper
+import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.domain.CharacterInfo
 import com.example.starwarscharacters.domain.CharactersRepository
 
 class CharactersRepositoryImpl(application: Application) : CharactersRepository {
 
     private val characterDao = AppDatabase.getInstance(application).characterDao()
+
+
     private val mapper = CharacterMapper()
 
     override fun getCharacter(name: String): LiveData<CharacterInfo> {
@@ -31,4 +34,5 @@ class CharactersRepositoryImpl(application: Application) : CharactersRepository 
         Log.i("Login","start ${deb.value?.size}")
         return deb
     }
+
 }

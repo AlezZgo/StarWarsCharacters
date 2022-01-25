@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
+import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.databinding.FragmentCharactersBinding
 import com.example.starwarscharacters.domain.CharacterInfo
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter

@@ -4,7 +4,8 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class CharacterListDto(
-    @SerializedName("Data")
-    @Expose
-    val names: List<CharacterDto>? = null
+    @SerializedName("count") val count : Int,
+    @SerializedName("next") val next : String,
+    @SerializedName("previous") val previous : String,
+    @SerializedName("results") val results : List<CharacterDto>
 )

@@ -7,53 +7,20 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "characters")
 data class CharacterDto(
-    @SerializedName("NAME")
-    @Expose
-    val name: String?,
-    @SerializedName("HEIGHT")
-    @Expose
-    val height: String?,
-    @PrimaryKey
-    @SerializedName("MASS")
-    @Expose
-    val mass: String,
-    @SerializedName("HAIRCOLOR")
-    @Expose
-    val hairColor: String?,
-    @SerializedName("SKINCOLOR")
-    @Expose
-    val skinColor: String?,
-    @SerializedName("EYECOLOR")
-    @Expose
-    val eyeColor: String?,
-    @SerializedName("BIRTHYEAR")
-    @Expose
-    val birthYear: String?,
-    @SerializedName("GENDER")
-    @Expose
-    val gender: String?,
-    @SerializedName("HOMEWORLD")
-    @Expose
-    val homeWorld: String?,
-    @SerializedName("FILMS")
-    @Expose
-    val films: String?,
-    @SerializedName("SPECIES")
-    @Expose
-    val species: String?,
-    @SerializedName("VEHICLES")
-    @Expose
-    val vehicles: String?,
-    @SerializedName("STARSHIPS")
-    @Expose
-    val starShips: String?,
-    @SerializedName("CREATED")
-    @Expose
-    val created: String?,
-    @SerializedName("EDITED")
-    @Expose
-    val edited: String?,
-    @SerializedName("URL")
-    @Expose
-    val url: String?,
+    @SerializedName("name") val name : String,
+    @SerializedName("height") val height : Int,
+    @SerializedName("mass") val mass : Int,
+    @SerializedName("hair_color") val hair_color : String,
+    @SerializedName("skin_color") val skin_color : String,
+    @SerializedName("eye_color") val eye_color : String,
+    @SerializedName("birth_year") val birth_year : String,
+    @SerializedName("gender") val gender : String,
+    @SerializedName("homeworld") val homeworld : String,
+    @SerializedName("films") val films : List<String>,
+    @SerializedName("species") val species : List<String>,
+    @SerializedName("vehicles") val vehicles : List<String>,
+    @SerializedName("starships") val starships : List<String>,
+    @SerializedName("created") val created : String,
+    @SerializedName("edited") val edited : String,
+    @SerializedName("url") val url : String
 )
