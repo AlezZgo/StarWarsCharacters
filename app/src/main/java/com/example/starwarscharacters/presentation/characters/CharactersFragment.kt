@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
 import com.example.starwarscharacters.databinding.FragmentCharactersBinding
+import com.example.starwarscharacters.domain.CharacterInfo
+import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -39,29 +41,20 @@ class CharactersFragment : Fragment() {
         charactersViewModel =
             ViewModelProvider(this)[CharactersViewModel::class.java]
 
-        for (i in 0..20) {
-            val list = listOf<CharacterInfoDbModel>(
-                CharacterInfoDbModel
-                    (
-                    "$i",
-                    "2",
-                    "2",
-                    "2",
-                    "2",
-                    "film1, film2"
-                )
-            )
-            val characters = AppDatabase.getInstance(requireActivity().application).characterDao()
-            CoroutineScope(Dispatchers.IO + Job()).launch {
-                characters.insert(list)
+        setAdapter()
+
+    }
+
+    fun setAdapter(){
+        val adapter = CharactersAdapter(requireContext())
+        adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener{
+            override fun onCharacterClick(characterInfo: CharacterInfo) {
+                Toast.makeText(requireContext(),"hello",Toast.LENGTH_LONG).show()
             }
         }
-        binding.root.setOnClickListener {
-            val characters = charactersViewModel.characterList.value
-            Toast.makeText(requireActivity().applicationContext,
-                characters.toString(),
-                Toast.LENGTH_LONG).show()
+        binding.rvCharacters.adapter = adapter
+        charactersViewModel.characterList.observe(requireActivity()){
+            adapter.submitList(it)
         }
-
     }
 }
