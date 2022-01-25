@@ -1,6 +1,7 @@
 package com.example.starwarscharacters.data.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.starwarscharacters.data.database.AppDatabase
@@ -20,10 +21,14 @@ class CharactersRepositoryImpl(application: Application) : CharactersRepository 
     }
 
     override fun getCharacterList(): LiveData<List<CharacterInfo>> {
-        return Transformations.map(characterDao.getCharacterList()){list->
+        Log.i("Logi","${characterDao.getCharacterList().value?.size}")
+        val deb = Transformations.map(characterDao.getCharacterList()){list->
+
             list.map{
                 mapper.mapDbModelToEntity(it)
             }
         }
+        Log.i("Login","start ${deb.value?.size}")
+        return deb
     }
 }

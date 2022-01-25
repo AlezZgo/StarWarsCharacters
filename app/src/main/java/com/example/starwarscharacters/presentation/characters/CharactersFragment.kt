@@ -31,7 +31,6 @@ class CharactersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCharactersBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
