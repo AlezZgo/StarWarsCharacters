@@ -14,6 +14,6 @@ class CharactersViewModel(application: Application) : AndroidViewModel(applicati
 
     private val getCharactersListUseCase = GetCharacterListUseCase(repository)
 
-    //val characterList = getCharactersListUseCase()
+    val characterList = getCharactersListUseCase()
 
 }

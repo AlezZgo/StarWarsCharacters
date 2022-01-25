@@ -4,9 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.starwarscharacters.data.database.AppDatabase
+import com.example.starwarscharacters.data.database.CharacterInfoDbModel
 import com.example.starwarscharacters.databinding.FragmentCharactersBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class CharactersFragment : Fragment() {
 
@@ -31,5 +38,28 @@ class CharactersFragment : Fragment() {
 
         charactersViewModel =
             ViewModelProvider(this)[CharactersViewModel::class.java]
+
+        for (i in 0..20) {
+            val list = listOf<CharacterInfoDbModel>(
+                CharacterInfoDbModel
+                    (
+                    "$i",
+                    "2",
+                    "2",
+                    "2",
+                    "2",
+                    "film1, film2"
+                )
+            )
+            val characters = AppDatabase.getInstance(requireActivity().application).characterDao()
+            CoroutineScope(Dispatchers.IO + Job()).launch {
+                characters.insert(list)
+            }
+        }
+        binding.root.setOnClickListener {
+            val characters = AppDatabase.getInstance(requireActivity().application).characterDao().getCharacterList().value
+            val el : Int? = characters?.size
+        }
+
     }
 }
