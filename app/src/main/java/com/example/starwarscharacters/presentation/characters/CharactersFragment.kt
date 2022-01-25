@@ -57,8 +57,10 @@ class CharactersFragment : Fragment() {
             }
         }
         binding.root.setOnClickListener {
-            val characters = AppDatabase.getInstance(requireActivity().application).characterDao().getCharacterList().value
-            val el : Int? = characters?.size
+            val characters = charactersViewModel.characterList.value
+            Toast.makeText(requireActivity().applicationContext,
+                characters.toString(),
+                Toast.LENGTH_LONG).show()
         }
 
     }
