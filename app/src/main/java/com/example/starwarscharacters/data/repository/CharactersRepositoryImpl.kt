@@ -12,7 +12,7 @@ import com.example.starwarscharacters.domain.repositories.CharactersRepository
 
 class CharactersRepositoryImpl(application: Application) : CharactersRepository {
 
-    private val characterDao = AppDatabase.getInstance(application).characterDao()
+
     private val remoteDataSource = RemoteDataSourceImpl()
 
     private val mapper = CharacterMapper()

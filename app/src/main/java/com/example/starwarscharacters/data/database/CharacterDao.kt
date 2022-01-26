@@ -8,12 +8,22 @@ import androidx.room.Query
 
 @Dao
 interface CharacterDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertList(charactersList: List<CharacterInfoDbModel>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(character: CharacterInfoDbModel)
+
     @Query("SELECT * FROM characters")
-    fun getCharacterList(): LiveData<List<CharacterInfoDbModel>>
+    fun getCharactersList(): LiveData<List<CharacterInfoDbModel>>
 
     @Query("SELECT * FROM characters WHERE name == :name LIMIT 1")
     fun getCharacter(name: String): LiveData<CharacterInfoDbModel>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(priceList: List<CharacterInfoDbModel>)
+    @Query("SELECT * FROM characters WHERE isFavourite = 1 ")
+    fun getFavouritesCharacters(): LiveData<List<CharacterInfoDbModel>>
+
+
+
 }

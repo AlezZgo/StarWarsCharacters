@@ -11,5 +11,6 @@ data class CharacterInfoDbModel(
     val mass: String,
     val height: String,
     val homeWorld: String,
-    val films: String
+    val films: String,
+    var isFavourite: Boolean
 )
