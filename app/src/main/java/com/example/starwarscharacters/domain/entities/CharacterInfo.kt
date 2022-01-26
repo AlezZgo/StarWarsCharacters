@@ -1,4 +1,4 @@
-package com.example.starwarscharacters.domain
+package com.example.starwarscharacters.domain.entities
 
 data class CharacterInfo(
     val name: String,

@@ -1,7 +1,7 @@
 package com.example.starwarscharacters.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.starwarscharacters.domain.CharacterInfo
+import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 object CharacterInfoDiffCallback : DiffUtil.ItemCallback<CharacterInfo>() {
 

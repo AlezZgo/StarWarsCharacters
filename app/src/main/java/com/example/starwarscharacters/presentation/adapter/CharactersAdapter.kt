@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.starwarscharacters.databinding.ItemCharacterBinding
-import com.example.starwarscharacters.domain.CharacterInfo
+import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 class CharactersAdapter(
     private val context: Context

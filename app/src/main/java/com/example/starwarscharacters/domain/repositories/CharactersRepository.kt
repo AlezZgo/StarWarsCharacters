@@ -1,6 +1,7 @@
-package com.example.starwarscharacters.domain
+package com.example.starwarscharacters.domain.repositories
 
 import androidx.lifecycle.LiveData
+import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 interface CharactersRepository {
     fun getCharacter(name:String): LiveData<CharacterInfo>
