@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="45dp"
+    android:layout_height="48dp"
     android:layout_margin="8dp">
 
     <TextView
@@ -22,17 +22,17 @@
 
     <ImageView
         android:id="@+id/iv_item"
-        android:layout_width="45dp"
+        android:layout_width="48dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_character"/>
+        app:srcCompat="@drawable/ic_character" />
 
     <ToggleButton
         android:id="@+id/tgbFav"
-        android:layout_width="45dp"
-        android:layout_height="0dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@drawable/tb_item_favourite"
         android:focusable="false"
         android:focusableInTouchMode="false"
