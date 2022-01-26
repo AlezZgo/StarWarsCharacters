@@ -8,7 +8,7 @@ import androidx.room.Query
 
 @Dao
 interface CharacterDao {
-    @Query("SELECT * FROM characters ORDER BY height DESC")
+    @Query("SELECT * FROM characters")
     fun getCharacterList(): LiveData<List<CharacterInfoDbModel>>
 
     @Query("SELECT * FROM characters WHERE name == :name LIMIT 1")
