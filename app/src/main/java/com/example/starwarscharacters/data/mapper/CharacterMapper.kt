@@ -11,7 +11,8 @@ class CharacterMapper {
         mass = infoDbModel.mass,
         height = infoDbModel.height,
         homeWorld = infoDbModel.homeWorld,
-        films = infoDbModel.films
+        films = infoDbModel.films,
+        isFavourite = infoDbModel.isFavourite
     )
 
     fun mapDtoToDbModel(characterDto: CharacterDto) = CharacterInfoDbModel(
@@ -20,6 +21,17 @@ class CharacterMapper {
         mass = characterDto.mass.toString(),
         height = characterDto.height.toString(),
         homeWorld = characterDto.homeworld,
-        films = characterDto.films.joinToString(separator = ",")
+        films = characterDto.films.joinToString(separator = ","),
+        isFavourite = false
+    )
+
+    fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDbModel(
+        name = CharacterInfo.name,
+        gender = CharacterInfo.gender,
+        mass = CharacterInfo.mass,
+        height = CharacterInfo.height,
+        homeWorld = CharacterInfo.homeWorld,
+        films = CharacterInfo.films,
+        isFavourite = CharacterInfo.isFavourite
     )
 }
