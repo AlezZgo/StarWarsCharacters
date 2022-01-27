@@ -11,9 +11,9 @@ interface ApiService {
     suspend fun getHalfOfCharacters(): CharacterHalfListDto
 
     @GET("{url}")
-    suspend fun getHalfOfCharactersByUrl(@Path("url")url: String): CharacterHalfListDto
+    suspend fun getHalfOfCharactersByUrl(@Path("url") url: String): CharacterHalfListDto
 
     @GET("{url}")
-    suspend fun getCharacterFilm(@Path("url")url: String): FilmDto
+    suspend fun getCharacterFilm(@Path("url") url: String): FilmDto
 
 }

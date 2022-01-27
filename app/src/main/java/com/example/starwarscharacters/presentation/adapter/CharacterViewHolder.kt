@@ -4,5 +4,5 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarscharacters.databinding.ItemCharacterBinding
 
 class CharacterViewHolder(
-    val binding: ItemCharacterBinding
+    val binding: ItemCharacterBinding,
 ) : RecyclerView.ViewHolder(binding.root)

@@ -21,7 +21,7 @@ class CharacterMapper {
         mass = characterDto.mass.toString(),
         height = characterDto.height.toString(),
         homeWorld = characterDto.homeworld,
-        films = characterDto.films.map{it.title}.joinToString(separator = ","),
+        films = characterDto.films.map { it.title }.joinToString(separator = ","),
         isFavourite = false
     )
 

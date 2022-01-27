@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
-import com.example.starwarscharacters.data.database.CharacterInfoDbModel
 import com.example.starwarscharacters.data.datasource.LocalDataSourceImpl
-import com.example.starwarscharacters.data.datasource.RemoteDataSourceImpl
 import com.example.starwarscharacters.data.mapper.CharacterMapper
 import com.example.starwarscharacters.data.workers.RefreshDataWorker
 import com.example.starwarscharacters.domain.entities.CharacterInfo

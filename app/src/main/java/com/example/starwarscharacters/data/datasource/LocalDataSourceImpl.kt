@@ -2,8 +2,6 @@ package com.example.starwarscharacters.data.datasource
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.map
 import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
 

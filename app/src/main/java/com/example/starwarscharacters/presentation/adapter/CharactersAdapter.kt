@@ -8,7 +8,7 @@ import com.example.starwarscharacters.databinding.ItemCharacterBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 class CharactersAdapter(
-    private val context: Context
+    private val context: Context,
 ) : ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback) {
 
     var onCharacterClickListener: OnCharacterClickListener? = null

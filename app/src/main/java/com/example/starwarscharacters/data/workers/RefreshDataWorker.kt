@@ -6,12 +6,9 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkerParameters
 import com.example.starwarscharacters.data.database.AppDatabase
-import com.example.starwarscharacters.data.datasource.LocalDataSourceImpl
 import com.example.starwarscharacters.data.datasource.RemoteDataSourceImpl
 import com.example.starwarscharacters.data.mapper.CharacterMapper
-import com.example.starwarscharacters.data.network.ApiFactory
 import kotlinx.coroutines.delay
-import java.lang.Exception
 
 class RefreshDataWorker(context: Context, private val workerParameters: WorkerParameters) :
     CoroutineWorker(
@@ -24,16 +21,16 @@ class RefreshDataWorker(context: Context, private val workerParameters: WorkerPa
     private val mapper = CharacterMapper()
 
     override suspend fun doWork(): Result {
-        while (true){
+        while (true) {
             try {
-                remoteDataSourceImpl.getAllCharacters().forEach {newCharacterDto->
+                remoteDataSourceImpl.getAllCharacters().forEach { newCharacterDto ->
                     val oldCharacterDbModel = characterDao.getCharacter(newCharacterDto.name)
                     characterDao.insert(mapper.mapDtoToDbModel(
                         newCharacterDto,
                         isFavourite = oldCharacterDbModel.value?.isFavourite ?: false
                     ))
                 }
-            }catch (e: Exception){
+            } catch (e: Exception) {
 
             }
             delay(UPDATE_TIME_IN_SECONDS * MILLIS_IN_SEC)

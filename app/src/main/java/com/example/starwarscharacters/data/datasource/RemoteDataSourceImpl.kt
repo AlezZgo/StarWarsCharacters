@@ -2,7 +2,6 @@ package com.example.starwarscharacters.data.datasource
 
 import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.data.network.model.CharacterDto
-import com.example.starwarscharacters.data.network.model.CharacterHalfListDto
 
 class RemoteDataSourceImpl : RemoteDataSource {
 
