@@ -15,13 +15,13 @@ class CharacterMapper {
         isFavourite = infoDbModel.isFavourite
     )
 
-    fun mapDtoToDbModel(characterDto: CharacterDto) = CharacterInfoDbModel(
+    fun mapDtoToDbModel(characterDto: CharacterDto, isFavourite: Boolean) = CharacterInfoDbModel(
         name = characterDto.name,
         gender = characterDto.gender,
         mass = characterDto.mass.toString(),
         height = characterDto.height.toString(),
         homeWorld = characterDto.homeworld,
-        films = characterDto.films.joinToString(separator = ","),
+        films = characterDto.films.map{it.title}.joinToString(separator = ","),
         isFavourite = false
     )
 

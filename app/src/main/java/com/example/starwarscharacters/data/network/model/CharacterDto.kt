@@ -16,7 +16,7 @@ data class CharacterDto(
     @SerializedName("birth_year") val birth_year : String,
     @SerializedName("gender") val gender : String,
     @SerializedName("homeworld") val homeworld : String,
-    @SerializedName("films") val films : List<String>,
+    @SerializedName("films") val films : List<FilmDto>,
     @SerializedName("species") val species : List<String>,
     @SerializedName("vehicles") val vehicles : List<String>,
     @SerializedName("starships") val starships : List<String>,
