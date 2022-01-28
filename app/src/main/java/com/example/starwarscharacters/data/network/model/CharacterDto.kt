@@ -3,7 +3,6 @@ package com.example.starwarscharacters.data.network.model
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "characters")
 data class CharacterDto(
     @SerializedName("name") val name: String,
     @SerializedName("height") val height: Int,
@@ -14,7 +13,7 @@ data class CharacterDto(
     @SerializedName("birth_year") val birth_year: String,
     @SerializedName("gender") val gender: String,
     @SerializedName("homeworld") val homeworld: String,
-    @SerializedName("films") val films: List<FilmDto>,
+    @SerializedName("films") val films: List<String>,
     @SerializedName("species") val species: List<String>,
     @SerializedName("vehicles") val vehicles: List<String>,
     @SerializedName("starships") val starships: List<String>,

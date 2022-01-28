@@ -12,16 +12,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
         var half = apiService.getHalfOfCharacters()
 
         results.addAll(half.results)
-        while (half.next != NULL) {
-            half = apiService.getHalfOfCharactersByUrl(half.next)
+        while (half.next != null) {
+            half = apiService.getHalfOfCharactersByUrl(half.next!!)
             results.addAll(half.results)
         }
         return results.toList()
     }
-
-    companion object {
-        private const val NULL = "null"
-    }
-
 
 }

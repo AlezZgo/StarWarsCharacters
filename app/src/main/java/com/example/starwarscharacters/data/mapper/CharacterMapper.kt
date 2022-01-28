@@ -1,10 +1,14 @@
 package com.example.starwarscharacters.data.mapper
 
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
+import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.data.network.model.CharacterDto
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 class CharacterMapper {
+
+    val api = ApiFactory.apiService
+
     fun mapDbModelToEntity(infoDbModel: CharacterInfoDbModel) = CharacterInfo(
         name = infoDbModel.name,
         gender = infoDbModel.gender,
@@ -15,13 +19,15 @@ class CharacterMapper {
         isFavourite = infoDbModel.isFavourite
     )
 
-    fun mapDtoToDbModel(characterDto: CharacterDto, isFavourite: Boolean) = CharacterInfoDbModel(
+    suspend fun mapDtoToDbModel(characterDto: CharacterDto, isFavourite: Boolean) = CharacterInfoDbModel(
         name = characterDto.name,
         gender = characterDto.gender,
         mass = characterDto.mass.toString(),
         height = characterDto.height.toString(),
-        homeWorld = characterDto.homeworld,
-        films = characterDto.films.map { it.title }.joinToString(separator = ","),
+        homeWorld = api.getCharacterHomeWorld(
+            characterDto.homeworld.removePrefix(ApiFactory.BASE_URL)).name,
+        films = characterDto.films.map { api.getCharacterFilm(
+            (it.removePrefix(ApiFactory.BASE_URL))).title}.joinToString(separator = ","),
         isFavourite = false
     )
 
