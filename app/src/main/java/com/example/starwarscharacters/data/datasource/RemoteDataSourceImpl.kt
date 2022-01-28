@@ -13,7 +13,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
         results.addAll(half.results)
         while (half.next != null) {
-            half = apiService.getHalfOfCharactersByUrl(half.next!!)
+            half = apiService.getHalfOfCharactersByUrl(half.next!!.removePrefix(ApiFactory.BASE_URL))
             results.addAll(half.results)
         }
         return results.toList()

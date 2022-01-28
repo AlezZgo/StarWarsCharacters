@@ -6,27 +6,46 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.starwarscharacters.R
+import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 
 class DescriptionFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DescriptionFragment()
-    }
-
     private lateinit var viewModel: DescriptionViewModel
+
+    private var _binding: FragmentDescriptionBinding? = null
+    private val binding: FragmentDescriptionBinding
+        get() = _binding ?: throw RuntimeException("FragmentDescription = null")
+
+    val args by navArgs<DescriptionFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_description, container, false)
+        _binding = FragmentDescriptionBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DescriptionViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[DescriptionViewModel::class.java]
+        with(binding){
+            with(args.character){
+                tvName.text = name
+                tvGender.text = gender
+                tvMass.text = mass
+                tvHeight.text = height
+                tvHomeWorld.text = homeWorld
+                tvFilms.text = films
+                tgbIsFavourite.isChecked = isFavourite
+            }
+        }
     }
 
+
+    companion object {
+        fun newInstance() = DescriptionFragment()
+    }
 }

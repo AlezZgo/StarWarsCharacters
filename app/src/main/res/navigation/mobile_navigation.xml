@@ -28,6 +28,10 @@
         android:id="@+id/descriptionFragment"
         android:name="com.example.starwarscharacters.presentation.description.DescriptionFragment"
         android:label="description_fragment"
-        tools:layout="@layout/description_fragment" />
+        tools:layout="@layout/description_fragment" >
+        <argument
+            android:name="Character"
+            app:argType="com.example.starwarscharacters.domain.entities.CharacterInfo" />
+    </fragment>
 
 </navigation>

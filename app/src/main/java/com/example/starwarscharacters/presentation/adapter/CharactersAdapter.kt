@@ -36,6 +36,6 @@ class CharactersAdapter(
     }
 
     interface OnCharacterClickListener {
-        fun onCharacterClick(characterInfo: CharacterInfo)
+        fun onCharacterClick(character: CharacterInfo)
     }
 }
