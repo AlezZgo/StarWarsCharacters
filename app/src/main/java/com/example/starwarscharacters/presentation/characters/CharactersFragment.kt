@@ -66,11 +66,12 @@ class CharactersFragment : Fragment() {
         CoroutineScope(Dispatchers.IO + Job()).launch {
             try {
                 characterDao = AppDatabase.getInstance(requireContext()).characterDao()
+                Log.i("logi",characterDao.getCharacter("Chewbacca").toString())
                 remoteDataSourceImpl.getAllCharacters().forEach { newCharacterDto ->
-                    val oldCharacterDbModel = characterDao.getCharacter(newCharacterDto.name)
+                    val oldCharacterDbModel : CharacterInfoDbModel? = characterDao.getCharacter(newCharacterDto.name)
                     val newCharacterDbModel = mapper.mapDtoToDbModel(
-                        newCharacterDto, isFavourite = oldCharacterDbModel.value?.isFavourite?:true)
-                    if(oldCharacterDbModel.value!=newCharacterDbModel){
+                        newCharacterDto, isFavourite = oldCharacterDbModel?.isFavourite?:false )
+                    if(oldCharacterDbModel!=newCharacterDbModel){
                         characterDao.insert(newCharacterDbModel)
                     }
                 }

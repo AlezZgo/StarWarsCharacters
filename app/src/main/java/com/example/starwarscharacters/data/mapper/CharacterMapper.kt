@@ -28,7 +28,7 @@ class CharacterMapper {
             characterDto.homeworld.removePrefix(ApiFactory.BASE_URL)).name,
         films = characterDto.films.map { api.getCharacterFilm(
             (it.removePrefix(ApiFactory.BASE_URL))).title}.joinToString(separator = ","),
-        isFavourite = false
+        isFavourite = isFavourite
     )
 
     fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDbModel(

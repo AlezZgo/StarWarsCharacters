@@ -27,7 +27,7 @@ class RefreshDataWorker(context: Context, private val workerParameters: WorkerPa
                     val oldCharacterDbModel = characterDao.getCharacter(newCharacterDto.name)
                     characterDao.insert(mapper.mapDtoToDbModel(
                         newCharacterDto,
-                        isFavourite = oldCharacterDbModel.value?.isFavourite ?: false
+                        isFavourite = oldCharacterDbModel?.isFavourite ?: false
                     ))
                 }
             } catch (e: Exception) {

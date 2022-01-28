@@ -11,7 +11,7 @@ interface LocalDataSource {
 
     fun getCharacters(): LiveData<List<CharacterInfoDbModel>>
 
-    fun getCharacter(name: String): LiveData<CharacterInfoDbModel>
+    fun getCharacter(name: String): CharacterInfoDbModel
 
     fun getFavouritesCharacters(): LiveData<List<CharacterInfoDbModel>>
 

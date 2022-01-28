@@ -16,10 +16,9 @@ class CharactersRepositoryImpl(private val application: Application) : Character
     private val localDataSource = LocalDataSourceImpl(application)
     private val mapper = CharacterMapper()
 
-    override fun getCharacter(name: String): LiveData<CharacterInfo> {
-        return Transformations.map(localDataSource.getCharacter(name)) {
-            mapper.mapDbModelToEntity(it)
-        }
+    override fun getCharacter(name: String): CharacterInfo {
+        return mapper.mapDbModelToEntity(localDataSource.getCharacter(name))
+
     }
 
     override fun getCharacterList(): LiveData<List<CharacterInfo>> {

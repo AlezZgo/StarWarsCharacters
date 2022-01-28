@@ -20,7 +20,7 @@ class LocalDataSourceImpl(application: Application) : LocalDataSource{
         return characterDao.getCharactersList()
     }
 
-    override fun getCharacter(name: String): LiveData<CharacterInfoDbModel> {
+    override fun getCharacter(name: String): CharacterInfoDbModel {
         return characterDao.getCharacter(name)
     }
 
