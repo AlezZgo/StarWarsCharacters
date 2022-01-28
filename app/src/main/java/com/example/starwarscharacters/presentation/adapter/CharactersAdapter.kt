@@ -12,6 +12,7 @@ class CharactersAdapter(
 ) : ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback) {
 
     var onCharacterClickListener: OnCharacterClickListener? = null
+    var onIsFavouriteClickListener: OnIsFavouriteClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val binding = ItemCharacterBinding.inflate(
@@ -27,6 +28,11 @@ class CharactersAdapter(
         with(holder.binding) {
             with(character) {
                 tvItemName.text = name
+                tgbFav.isChecked = isFavourite
+
+                tgbFav.setOnClickListener {
+                    onIsFavouriteClickListener?.onIsFavouriteClick(this)
+                }
 
                 root.setOnClickListener {
                     onCharacterClickListener?.onCharacterClick(this)
@@ -37,5 +43,9 @@ class CharactersAdapter(
 
     interface OnCharacterClickListener {
         fun onCharacterClick(character: CharacterInfo)
+    }
+
+    interface OnIsFavouriteClickListener {
+        fun onIsFavouriteClick(character: CharacterInfo)
     }
 }

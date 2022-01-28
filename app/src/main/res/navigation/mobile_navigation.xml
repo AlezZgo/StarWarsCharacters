@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_characters" >
         <action
             android:id="@+id/action_navigation_characters_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
+            app:destination="@id/descriptionFragment"
+            app:popUpTo="@id/navigation_characters" />
     </fragment>
 
     <fragment
@@ -22,7 +23,8 @@
         tools:layout="@layout/fragment_favourites" >
         <action
             android:id="@+id/action_navigation_favourites_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
+            app:destination="@id/descriptionFragment"
+            app:popUpTo="@id/navigation_favourites" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"

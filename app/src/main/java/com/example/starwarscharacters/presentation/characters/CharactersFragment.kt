@@ -50,6 +50,14 @@ class CharactersFragment : Fragment() {
                 launchDescriptionFragment(character)
             }
         }
+        adapter.onIsFavouriteClickListener = object : CharactersAdapter.OnIsFavouriteClickListener{
+            override fun onIsFavouriteClick(character: CharacterInfo) {
+                CoroutineScope(Dispatchers.IO + Job() ).launch{
+                    viewModel.insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
+                }
+            }
+        }
+
         binding.rvCharacters.adapter = adapter
 
         viewModel.characterList.observe(viewLifecycleOwner) {
