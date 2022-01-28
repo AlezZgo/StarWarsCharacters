@@ -20,7 +20,7 @@ class CharactersViewModel(application: Application) : AndroidViewModel(applicati
     val characterList = getCharactersListUseCase()
 
     init {
-        loadDataUseCase()
+        //loadDataUseCase()
     }
 
 }

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class FilmDto(
 
     @SerializedName("title") val title: String,
-    @SerializedName("episode_id") val episode_id: Int,
+    @SerializedName("episode_id") val episode_id: String,
     @SerializedName("opening_crawl") val opening_crawl: String,
     @SerializedName("director") val director: String,
     @SerializedName("producer") val producer: String,

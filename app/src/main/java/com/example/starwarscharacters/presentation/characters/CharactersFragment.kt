@@ -66,16 +66,14 @@ class CharactersFragment : Fragment() {
         CoroutineScope(Dispatchers.IO + Job()).launch {
             try {
                 characterDao = AppDatabase.getInstance(requireContext()).characterDao()
-
-//                val a = remoteDataSourceImpl.getAllCharacters()
-//                Log.i("logi",a.toString())
-//                remoteDataSourceImpl.getAllCharacters().forEach { newCharacterDto ->
-//                    val oldCharacterDbModel = characterDao.getCharacter(newCharacterDto.name)
-//                    characterDao.insert(mapper.mapDtoToDbModel(
-//                        newCharacterDto,
-//                        isFavourite = oldCharacterDbModel.value?.isFavourite ?: false
-//                    ))
-//                }
+                remoteDataSourceImpl.getAllCharacters().forEach { newCharacterDto ->
+                    val oldCharacterDbModel = characterDao.getCharacter(newCharacterDto.name)
+                    val newCharacterDbModel = mapper.mapDtoToDbModel(
+                        newCharacterDto, isFavourite = oldCharacterDbModel.value?.isFavourite?:true)
+                    if(oldCharacterDbModel.value!=newCharacterDbModel){
+                        characterDao.insert(newCharacterDbModel)
+                    }
+                }
             } catch (e: Exception) {
             }
         }

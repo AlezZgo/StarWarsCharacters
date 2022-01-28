@@ -5,14 +5,15 @@ import com.example.starwarscharacters.data.network.model.FilmDto
 import com.example.starwarscharacters.data.network.model.HomeWorldDto
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 interface ApiService {
 
     @GET("api/people")
     suspend fun getHalfOfCharacters(): CharacterHalfListDto
 
-    @GET("{url}")
-    suspend fun getHalfOfCharactersByUrl(@Path("url") url: String): CharacterHalfListDto
+    @GET
+    suspend fun getHalfOfCharactersByUrl(@Url url:String ): CharacterHalfListDto
 
     @GET("{url}")
     suspend fun getCharacterFilm(@Path("url") url: String): FilmDto

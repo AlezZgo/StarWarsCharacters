@@ -15,13 +15,13 @@ interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(character: CharacterInfoDbModel)
 
-    @Query("SELECT * FROM characters")
+    @Query("SELECT * FROM characters ORDER BY name ASC")
     fun getCharactersList(): LiveData<List<CharacterInfoDbModel>>
 
     @Query("SELECT * FROM characters WHERE name == :name LIMIT 1")
     fun getCharacter(name: String): LiveData<CharacterInfoDbModel>
 
-    @Query("SELECT * FROM characters WHERE isFavourite = 1 ")
+    @Query("SELECT * FROM characters WHERE isFavourite = 1 ORDER BY name ASC ")
     fun getFavouritesCharacters(): LiveData<List<CharacterInfoDbModel>>
 
 
