@@ -65,7 +65,7 @@ class FavouritesFragment : Fragment() {
 
     fun launchDescriptionFragment(character: CharacterInfo){
         findNavController().navigate(
-            CharactersFragmentDirections.actionNavigationCharactersToDescriptionFragment(character)
+            FavouritesFragmentDirections.actionNavigationFavouritesToDescriptionFragment(character)
         )
     }
 

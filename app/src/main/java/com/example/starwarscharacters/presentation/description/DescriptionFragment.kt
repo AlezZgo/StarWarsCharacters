@@ -9,10 +9,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.starwarscharacters.R
 import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
+import com.example.starwarscharacters.presentation.favourites.FavouritesViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class DescriptionFragment : Fragment() {
 
-    private lateinit var viewModel: DescriptionViewModel
+    private val viewModel: DescriptionViewModel by lazy {
+        ViewModelProvider(this)[DescriptionViewModel::class.java]
+    }
 
     private var _binding: FragmentDescriptionBinding? = null
     private val binding: FragmentDescriptionBinding
@@ -25,12 +32,7 @@ class DescriptionFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentDescriptionBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[DescriptionViewModel::class.java]
         with(binding){
             with(args.character){
                 tvName.text = name
@@ -40,10 +42,19 @@ class DescriptionFragment : Fragment() {
                 tvHomeWorld.text = homeWorld
                 tvFilms.text = films
                 tgbIsFavourite.isChecked = isFavourite
+                tgbIsFavourite.setOnClickListener {
+                    CoroutineScope(Dispatchers.IO+ Job()).launch {
+                        val oldObj = viewModel.getCharacterUseCase(name)
+                        val newObj = oldObj.copy(isFavourite = !oldObj.isFavourite)
+                        viewModel.insertCharacterUseCase(newObj)
+                        tgbIsFavourite.isChecked = newObj.isFavourite
+                    }
+                }
             }
         }
-    }
 
+        return binding.root
+    }
 
     companion object {
         fun newInstance() = DescriptionFragment()
