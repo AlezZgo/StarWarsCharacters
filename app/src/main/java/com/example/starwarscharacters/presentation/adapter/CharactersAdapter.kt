@@ -9,7 +9,7 @@ import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 class CharactersAdapter(
     private val context: Context,
-) : ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback) {
+) : ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback()) {
 
     var onCharacterClickListener: OnCharacterClickListener? = null
     var onIsFavouriteClickListener: OnIsFavouriteClickListener? = null

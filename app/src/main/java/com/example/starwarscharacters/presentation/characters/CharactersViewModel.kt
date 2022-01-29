@@ -16,14 +16,12 @@ class CharactersViewModel(application: Application) : AndroidViewModel(applicati
 
     private val loadDataUseCase = LoadDataUseCase(repository)
 
-    val getCharacterUseCase = GetCharacterUseCase(repository)
-
     val insertCharacterUseCase = InsertCharacterUseCase(repository)
 
     val characterList = getCharactersListUseCase()
 
     init {
-        //loadDataUseCase()
+        loadDataUseCase()
     }
 
 }
