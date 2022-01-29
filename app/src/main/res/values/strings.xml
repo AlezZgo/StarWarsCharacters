@@ -4,4 +4,10 @@
     <string name="title_favourites">Favourite</string>
     <string name="search">Search</string>
     <string name="image_of_character">image of character</string>
+    <string name="character_gender_template">Gender: %s</string>
+    <string name="character_mass_template">Mass: %s kg</string>
+    <string name="character_height_template">Height: %s cm</string>
+    <string name="character_homeworld_template">HomeWorld: %s</string>
+    <string name="character_films_template">Films: %s</string>
+
 </resources>

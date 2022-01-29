@@ -36,11 +36,11 @@ class DescriptionFragment : Fragment() {
         with(binding){
             with(args.character){
                 tvName.text = name
-                tvGender.text = gender
-                tvMass.text = mass
-                tvHeight.text = height
-                tvHomeWorld.text = homeWorld
-                tvFilms.text = films
+                tvGender.text = getString(R.string.character_gender_template,gender)
+                tvMass.text = getString(R.string.character_mass_template,mass)
+                tvHeight.text = getString(R.string.character_height_template,height)
+                tvHomeWorld.text = getString(R.string.character_homeworld_template,homeWorld)
+                tvFilms.text = getString(R.string.character_films_template,films)
                 tgbIsFavourite.isChecked = isFavourite
                 tgbIsFavourite.setOnClickListener {
                     CoroutineScope(Dispatchers.IO+ Job()).launch {

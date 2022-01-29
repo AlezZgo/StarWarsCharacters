@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="6dp">
 
     <ToggleButton
         android:id="@+id/tgb_isFavourite"
-        android:layout_width="108dp"
-        android:layout_height="107dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="@drawable/tb_item_favourite"
         android:focusable="false"
         android:focusableInTouchMode="false"
@@ -76,12 +77,12 @@
 
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="182dp"
-        android:layout_height="170dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:contentDescription="@string/image_of_character"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher" />
+        app:srcCompat="@drawable/ic_character" />
 
     <TextView
         android:id="@+id/tv_mass"
