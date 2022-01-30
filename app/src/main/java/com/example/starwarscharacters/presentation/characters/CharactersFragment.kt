@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
 
     private val viewModel: CharactersViewModel by lazy {
-        ViewModelProvider(this).get(CharactersViewModel::class.java)
+        ViewModelProvider(this)[CharactersViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
