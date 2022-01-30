@@ -6,7 +6,7 @@ import com.example.starwarscharacters.domain.entities.CharacterInfo
 interface CharactersRepository {
     fun getCharacter(name: String): CharacterInfo
 
-    fun getCharacterList(): LiveData<List<CharacterInfo>>
+    fun getCharacterList(filter: String): LiveData<List<CharacterInfo>>
 
     fun getFavouritesCharacters(): LiveData<List<CharacterInfo>>
 

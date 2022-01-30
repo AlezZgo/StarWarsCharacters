@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -63,6 +64,21 @@ class CharactersFragment : Fragment() {
         viewModel.characterList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
+
+
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { viewModel.setFilter(it) }
+                return false
+            }
+
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                query?.let { viewModel.setFilter(it) }
+                return false
+            }
+        })
 
         return binding.root
     }

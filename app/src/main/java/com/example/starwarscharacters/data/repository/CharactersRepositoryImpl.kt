@@ -21,8 +21,8 @@ class CharactersRepositoryImpl(private val application: Application) : Character
 
     }
 
-    override fun getCharacterList(): LiveData<List<CharacterInfo>> {
-        return Transformations.map(localDataSource.getCharacters()) { list ->
+    override fun getCharacterList(filter: String): LiveData<List<CharacterInfo>> {
+        return Transformations.map(localDataSource.getCharacters(filter)) { list ->
             list.map {
                 mapper.mapDbModelToEntity(it)
             }

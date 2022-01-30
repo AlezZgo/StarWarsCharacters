@@ -3,6 +3,8 @@ package com.example.starwarscharacters.presentation.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.ListAdapter
 import com.example.starwarscharacters.databinding.ItemCharacterBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
@@ -48,4 +50,24 @@ class CharactersAdapter(
     interface OnIsFavouriteClickListener {
         fun onIsFavouriteClick(character: CharacterInfo)
     }
+
+//    interface OnFilter{
+//        fun filter
+//    }
+
+//    override fun getFilter(): Filter {
+//        return FilterImpl
+//    }
+//
+//    object FilterImpl : Filter() {
+//        override fun performFiltering(p0: CharSequence?): FilterResults {
+//            TODO("Not yet implemented")
+//        }
+//
+//        override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+//            TODO("Not yet implemented")
+//        }
+//    }
+
+
 }

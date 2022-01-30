@@ -16,8 +16,8 @@ class LocalDataSourceImpl(application: Application) : LocalDataSource{
         characterDao.insert(character)
     }
 
-    override fun getCharacters(): LiveData<List<CharacterInfoDbModel>> {
-        return characterDao.getCharactersList()
+    override fun getCharacters(filter: String): LiveData<List<CharacterInfoDbModel>> {
+        return characterDao.getCharactersList(filter)
     }
 
     override fun getCharacter(name: String): CharacterInfoDbModel {
