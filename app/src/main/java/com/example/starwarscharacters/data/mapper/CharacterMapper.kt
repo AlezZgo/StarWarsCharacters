@@ -19,17 +19,20 @@ class CharacterMapper {
         isFavourite = infoDbModel.isFavourite
     )
 
-    suspend fun mapDtoToDbModel(characterDto: CharacterDto, isFavourite: Boolean) = CharacterInfoDbModel(
-        name = characterDto.name,
-        gender = characterDto.gender,
-        mass = characterDto.mass.toString(),
-        height = characterDto.height.toString(),
-        homeWorld = api.getCharacterHomeWorld(
-            characterDto.homeworld.removePrefix(ApiFactory.BASE_URL)).name,
-        films = characterDto.films.map { api.getCharacterFilm(
-            (it.removePrefix(ApiFactory.BASE_URL))).title}.joinToString(separator = ","),
-        isFavourite = isFavourite
-    )
+    suspend fun mapDtoToDbModel(characterDto: CharacterDto, isFavourite: Boolean) =
+        CharacterInfoDbModel(
+            name = characterDto.name,
+            gender = characterDto.gender,
+            mass = characterDto.mass.toString(),
+            height = characterDto.height.toString(),
+            homeWorld = api.getCharacterHomeWorld(
+                characterDto.homeworld.removePrefix(ApiFactory.BASE_URL)).name,
+            films = characterDto.films.map {
+                api.getCharacterFilm(
+                    (it.removePrefix(ApiFactory.BASE_URL))).title
+            }.joinToString(separator = ","),
+            isFavourite = isFavourite
+        )
 
     fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDbModel(
         name = CharacterInfo.name,

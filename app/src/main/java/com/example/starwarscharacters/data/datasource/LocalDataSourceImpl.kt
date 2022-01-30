@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
 
-class LocalDataSourceImpl(application: Application) : LocalDataSource{
+class LocalDataSourceImpl(application: Application) : LocalDataSource {
 
     private val characterDao = AppDatabase.getInstance(application).characterDao()
     override suspend fun insertList(list: List<CharacterInfoDbModel>) {

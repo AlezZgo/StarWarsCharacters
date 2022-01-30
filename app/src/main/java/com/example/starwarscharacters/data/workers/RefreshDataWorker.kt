@@ -1,7 +1,6 @@
 package com.example.starwarscharacters.data.workers
 
 import android.content.Context
-import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
@@ -26,10 +25,11 @@ class RefreshDataWorker(context: Context, private val workerParameters: WorkerPa
         while (true) {
             try {
                 remoteDataSourceImpl.getAllCharacters().forEach { newCharacterDto ->
-                    val oldCharacterDbModel : CharacterInfoDbModel? = characterDao.getCharacter(newCharacterDto.name)
+                    val oldCharacterDbModel: CharacterInfoDbModel? =
+                        characterDao.getCharacter(newCharacterDto.name)
                     val newCharacterDbModel = mapper.mapDtoToDbModel(
-                        newCharacterDto, isFavourite = oldCharacterDbModel?.isFavourite?:false )
-                    if(oldCharacterDbModel!=newCharacterDbModel){
+                        newCharacterDto, isFavourite = oldCharacterDbModel?.isFavourite ?: false)
+                    if (oldCharacterDbModel != newCharacterDbModel) {
                         characterDao.insert(newCharacterDbModel)
                     }
                 }

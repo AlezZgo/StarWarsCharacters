@@ -12,6 +12,7 @@ import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.databinding.FragmentFavouritesBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
+import com.example.starwarscharacters.presentation.BaseFragment
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
 import com.example.starwarscharacters.presentation.characters.CharactersFragmentDirections
 import com.example.starwarscharacters.presentation.characters.CharactersViewModel
@@ -21,24 +22,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class FavouritesFragment : Fragment() {
+class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
 
     private val viewModel: FavouritesViewModel by lazy {
         ViewModelProvider(this)[FavouritesViewModel::class.java]
     }
 
-    private var _binding: FragmentFavouritesBinding? = null
-    private val binding: FragmentFavouritesBinding
-        get() = _binding ?: throw RuntimeException("FragmentFavourites = null")
+    override fun initBinding(inflater: LayoutInflater,container: ViewGroup?,
+    ): FragmentFavouritesBinding = FragmentFavouritesBinding.inflate(inflater,container,false)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
+        setUpAdapter()
 
+    }
+    private fun setUpAdapter() {
         val adapter = CharactersAdapter(requireContext())
 
         adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener {
@@ -59,8 +58,6 @@ class FavouritesFragment : Fragment() {
         viewModel.favouriteCharacterList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-
-        return binding.root
     }
 
     fun launchDescriptionFragment(character: CharacterInfo){
@@ -69,8 +66,5 @@ class FavouritesFragment : Fragment() {
         )
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

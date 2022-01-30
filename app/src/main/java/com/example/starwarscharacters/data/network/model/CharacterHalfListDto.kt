@@ -6,5 +6,5 @@ data class CharacterHalfListDto(
     @SerializedName("count") val count: String,
     @SerializedName("next") val next: String?,
     @SerializedName("previous") val previous: String?,
-    @SerializedName("results") val results: List<CharacterDto>
+    @SerializedName("results") val results: List<CharacterDto>,
 )

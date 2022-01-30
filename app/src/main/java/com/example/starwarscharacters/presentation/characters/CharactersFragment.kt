@@ -25,13 +25,13 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setAdapter()
+        setUpAdapter()
 
         setFilter()
 
     }
 
-    private fun setAdapter(){
+    private fun setUpAdapter() {
         val adapter = CharactersAdapter(requireContext())
 
         adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener {
@@ -54,7 +54,7 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
         }
     }
 
-    private fun setFilter(){
+    private fun setFilter() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let { viewModel.setFilter(it) }
@@ -68,7 +68,6 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
             }
         })
     }
-
 
 
     private fun launchDescriptionFragment(character: CharacterInfo) {

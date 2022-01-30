@@ -21,7 +21,7 @@ class CharactersViewModel(application: Application) : AndroidViewModel(applicati
 
     val insertCharacterUseCase = InsertCharacterUseCase(repository)
 
-    var characterList : LiveData<List<CharacterInfo>>
+    var characterList: LiveData<List<CharacterInfo>>
     var filter = MutableLiveData("%")
 
 
