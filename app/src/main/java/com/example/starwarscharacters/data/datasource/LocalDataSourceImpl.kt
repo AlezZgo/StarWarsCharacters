@@ -1,18 +1,19 @@
 package com.example.starwarscharacters.data.datasource
 
-import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.starwarscharacters.data.database.AppDatabase
+import com.example.starwarscharacters.data.database.CharacterDao
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
+import javax.inject.Inject
 
-class LocalDataSourceImpl(application: Application) : LocalDataSource {
+class LocalDataSourceImpl @Inject constructor(
+    private val characterDao: CharacterDao,
+) : LocalDataSource {
 
-    private val characterDao = AppDatabase.getInstance(application).characterDao()
     override suspend fun insertList(list: List<CharacterInfoDbModel>) {
         characterDao.insertList(list)
     }
 
-    override suspend fun insertCharacter(character: CharacterInfoDbModel) {
+    override suspend fun insert(character: CharacterInfoDbModel) {
         characterDao.insert(character)
     }
 

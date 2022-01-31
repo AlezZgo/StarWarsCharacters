@@ -2,26 +2,24 @@ package com.example.starwarscharacters.data.workers
 
 import android.content.Context
 import androidx.work.*
-import com.example.starwarscharacters.data.database.AppDatabase
+import com.example.starwarscharacters.data.database.CharacterDao
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
-import com.example.starwarscharacters.data.datasource.RemoteDataSourceImpl
+import com.example.starwarscharacters.data.datasource.LocalDataSource
+import com.example.starwarscharacters.data.datasource.RemoteDataSource
 import com.example.starwarscharacters.data.mapper.CharacterMapper
-import kotlinx.coroutines.delay
-import java.util.concurrent.TimeUnit
+import com.example.starwarscharacters.data.network.ApiService
+import javax.inject.Inject
 
-class RefreshDataWorker(context: Context, private val workerParameters: WorkerParameters) :
-    CoroutineWorker(
-        context,
-        workerParameters
-    ) {
-
-    private val remoteDataSourceImpl = RemoteDataSourceImpl()
-    private val characterDao = AppDatabase.getInstance(context).characterDao()
-    private val mapper = CharacterMapper()
+class RefreshDataWorker(
+    context: Context,
+    workerParameters: WorkerParameters,
+    private val remoteDataSource: RemoteDataSource,
+    private val characterDao: CharacterDao,
+    private val mapper: CharacterMapper,
+) : CoroutineWorker(context,workerParameters) {
 
     override suspend fun doWork(): Result {
-
-        remoteDataSourceImpl.getAllCharacters().forEach { newCharacterDto ->
+        remoteDataSource.getAllCharacters().forEach { newCharacterDto ->
             val oldCharacterDbModel: CharacterInfoDbModel? =
                 characterDao.getCharacter(newCharacterDto.name)
             val newCharacterDbModel = mapper.mapDtoToDbModel(
@@ -38,6 +36,26 @@ class RefreshDataWorker(context: Context, private val workerParameters: WorkerPa
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<RefreshDataWorker>().build()
+        }
+    }
+
+    class Factory @Inject constructor(
+        private val characterDao: CharacterDao,
+        private val remoteDataSource: RemoteDataSource,
+        private val mapper: CharacterMapper
+    ) : ChildWorkerFactory {
+
+        override fun create(
+            context: Context,
+            workerParameters: WorkerParameters
+        ): ListenableWorker {
+            return RefreshDataWorker(
+                context,
+                workerParameters,
+                remoteDataSource,
+                characterDao,
+                mapper
+            )
         }
     }
 }

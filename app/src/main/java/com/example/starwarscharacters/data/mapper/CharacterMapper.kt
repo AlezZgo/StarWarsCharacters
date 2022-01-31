@@ -2,12 +2,12 @@ package com.example.starwarscharacters.data.mapper
 
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
 import com.example.starwarscharacters.data.network.ApiFactory
+import com.example.starwarscharacters.data.network.ApiService
 import com.example.starwarscharacters.data.network.model.CharacterDto
 import com.example.starwarscharacters.domain.entities.CharacterInfo
+import javax.inject.Inject
 
-class CharacterMapper {
-
-    val api = ApiFactory.apiService
+class CharacterMapper  @Inject constructor(private val apiService: ApiService) {
 
     fun mapDbModelToEntity(infoDbModel: CharacterInfoDbModel) = CharacterInfo(
         name = infoDbModel.name,
@@ -25,10 +25,10 @@ class CharacterMapper {
             gender = characterDto.gender,
             mass = characterDto.mass.toString(),
             height = characterDto.height.toString(),
-            homeWorld = api.getCharacterHomeWorld(
+            homeWorld = apiService.getCharacterHomeWorld(
                 characterDto.homeworld.removePrefix(ApiFactory.BASE_URL)).name,
             films = characterDto.films.map {
-                api.getCharacterFilm(
+                apiService.getCharacterFilm(
                     (it.removePrefix(ApiFactory.BASE_URL))).title
             }.joinToString(separator = ","),
             isFavourite = isFavourite

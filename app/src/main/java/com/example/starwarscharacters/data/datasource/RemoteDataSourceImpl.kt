@@ -1,11 +1,11 @@
 package com.example.starwarscharacters.data.datasource
 
 import com.example.starwarscharacters.data.network.ApiFactory
+import com.example.starwarscharacters.data.network.ApiService
 import com.example.starwarscharacters.data.network.model.CharacterDto
+import javax.inject.Inject
 
-class RemoteDataSourceImpl : RemoteDataSource {
-
-    private val apiService = ApiFactory.apiService
+class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) : RemoteDataSource {
 
     override suspend fun getAllCharacters(): List<CharacterDto> {
         val results = mutableListOf<CharacterDto>()

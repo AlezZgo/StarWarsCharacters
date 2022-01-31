@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.starwarscharacters.databinding.ItemCharacterBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
+import javax.inject.Inject
 
-class CharactersAdapter(
+class CharactersAdapter @Inject constructor(
     private val context: Context,
 ) : ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback()) {
 

@@ -1,29 +1,23 @@
 package com.example.starwarscharacters.presentation.characters
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.example.starwarscharacters.data.repository.CharactersRepositoryImpl
+import androidx.lifecycle.ViewModel
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.usecases.GetCharacterListUseCase
 import com.example.starwarscharacters.domain.usecases.InsertCharacterUseCase
 import com.example.starwarscharacters.domain.usecases.LoadDataUseCase
+import javax.inject.Inject
 
-class CharactersViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = CharactersRepositoryImpl(application)
-
-    private val getCharactersListUseCase = GetCharacterListUseCase(repository)
-
-    private val loadDataUseCase = LoadDataUseCase(repository)
-
-    val insertCharacterUseCase = InsertCharacterUseCase(repository)
+class CharactersViewModel @Inject constructor(
+    private val getCharactersListUseCase: GetCharacterListUseCase,
+    private val loadDataUseCase: LoadDataUseCase,
+    val insertCharacterUseCase: InsertCharacterUseCase,
+) : ViewModel() {
 
     var characterList: LiveData<List<CharacterInfo>>
     var filter = MutableLiveData("%")
-
 
     init {
         loadDataUseCase()

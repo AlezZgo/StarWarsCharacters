@@ -7,7 +7,7 @@ interface LocalDataSource {
 
     suspend fun insertList(list: List<CharacterInfoDbModel>)
 
-    suspend fun insertCharacter(character: CharacterInfoDbModel)
+    suspend fun insert(character: CharacterInfoDbModel)
 
     fun getCharacters(filter: String): LiveData<List<CharacterInfoDbModel>>
 
