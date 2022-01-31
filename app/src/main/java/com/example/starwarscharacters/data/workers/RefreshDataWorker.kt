@@ -35,8 +35,6 @@ class RefreshDataWorker(context: Context, private val workerParameters: WorkerPa
 
     companion object {
         const val NAME = "RefreshDataWorker"
-        const val UPDATE_TIME_IN_SECONDS = 10
-        const val MILLIS_IN_SEC = 1000L
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<RefreshDataWorker>().build()
