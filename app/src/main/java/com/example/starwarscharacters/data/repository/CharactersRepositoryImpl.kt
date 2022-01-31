@@ -3,6 +3,7 @@ package com.example.starwarscharacters.data.repository
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.example.starwarscharacters.data.datasource.LocalDataSourceImpl
@@ -43,6 +44,7 @@ class CharactersRepositoryImpl(private val application: Application) : Character
 
     override fun loadData() {
         val workManager = WorkManager.getInstance(application)
+
         workManager.enqueueUniqueWork(
             RefreshDataWorker.NAME,
             ExistingWorkPolicy.REPLACE,
