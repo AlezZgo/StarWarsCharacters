@@ -14,7 +14,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val component by lazy {
+        (application as StarWarsApp).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)

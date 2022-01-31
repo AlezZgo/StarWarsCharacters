@@ -1,5 +1,6 @@
 package com.example.starwarscharacters.presentation.description
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +10,24 @@ import androidx.navigation.fragment.navArgs
 import com.example.starwarscharacters.R
 import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.presentation.BaseFragment
+import com.example.starwarscharacters.presentation.StarWarsApp
+import com.example.starwarscharacters.presentation.ViewModelFactory
+import com.example.starwarscharacters.presentation.characters.CharactersViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class DescriptionFragment : BaseFragment<FragmentDescriptionBinding>() {
 
-    private val viewModel: DescriptionViewModel by lazy {
-        ViewModelProvider(this)[DescriptionViewModel::class.java]
+    private lateinit var viewModel: DescriptionViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as StarWarsApp).component
     }
 
     private val args by navArgs<DescriptionFragmentArgs>()
@@ -28,7 +38,13 @@ class DescriptionFragment : BaseFragment<FragmentDescriptionBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DescriptionViewModel::class.java]
         initViewsContent()
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     private fun initViewsContent() {

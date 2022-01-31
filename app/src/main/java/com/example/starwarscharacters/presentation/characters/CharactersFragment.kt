@@ -1,5 +1,6 @@
 package com.example.starwarscharacters.presentation.characters
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +11,35 @@ import androidx.navigation.fragment.findNavController
 import com.example.starwarscharacters.databinding.FragmentCharactersBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.presentation.BaseFragment
+import com.example.starwarscharacters.presentation.StarWarsApp
+import com.example.starwarscharacters.presentation.ViewModelFactory
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
 
-    private val viewModel: CharactersViewModel by lazy {
-        ViewModelProvider(this)[CharactersViewModel::class.java]
+    private lateinit var viewModel: CharactersViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as StarWarsApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this, viewModelFactory)[CharactersViewModel::class.java]
 
         setUpAdapter()
 

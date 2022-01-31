@@ -1,5 +1,6 @@
 package com.example.starwarscharacters.data.repository
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.work.ExistingWorkPolicy
@@ -11,9 +12,11 @@ import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.repositories.CharactersRepository
 import javax.inject.Inject
 
-class CharactersRepositoryImpl @Inject constructor(private val mapper: CharacterMapper,
-                                                   private val localDataSource: LocalDataSource,
-                                                   private val workManager: WorkManager) : CharactersRepository {
+class CharactersRepositoryImpl @Inject constructor(
+    private val mapper: CharacterMapper,
+    private val localDataSource: LocalDataSource,
+    private val application: Application,
+) : CharactersRepository {
 
     override fun getCharacter(name: String): CharacterInfo {
         return mapper.mapDbModelToEntity(localDataSource.getCharacter(name))
@@ -40,11 +43,12 @@ class CharactersRepositoryImpl @Inject constructor(private val mapper: Character
     }
 
     override fun loadData() {
-        workManager.enqueueUniqueWork(
-            RefreshDataWorker.NAME,
-            ExistingWorkPolicy.REPLACE,
-            RefreshDataWorker.makeRequest()
-        )
+        WorkManager.getInstance(application)
+            .enqueueUniqueWork(
+                RefreshDataWorker.NAME,
+                ExistingWorkPolicy.REPLACE,
+                RefreshDataWorker.makeRequest()
+            )
     }
 
 }

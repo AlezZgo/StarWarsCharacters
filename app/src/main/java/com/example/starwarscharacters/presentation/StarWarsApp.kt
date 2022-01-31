@@ -1,8 +1,9 @@
 package com.example.starwarscharacters.presentation
 
 import android.app.Application
-import android.content.res.Configuration
+import androidx.work.Configuration
 import com.example.starwarscharacters.data.workers.CharacterWorkerFactory
+import com.example.starwarscharacters.di.DaggerApplicationComponent
 import javax.inject.Inject
 
 class StarWarsApp: Application(), Configuration.Provider {

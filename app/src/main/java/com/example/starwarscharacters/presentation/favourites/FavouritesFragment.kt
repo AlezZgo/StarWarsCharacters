@@ -1,5 +1,6 @@
 package com.example.starwarscharacters.presentation.favourites
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,8 @@ import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.databinding.FragmentFavouritesBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.presentation.BaseFragment
+import com.example.starwarscharacters.presentation.StarWarsApp
+import com.example.starwarscharacters.presentation.ViewModelFactory
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
 import com.example.starwarscharacters.presentation.characters.CharactersFragmentDirections
 import com.example.starwarscharacters.presentation.characters.CharactersViewModel
@@ -21,11 +24,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
 
-    private val viewModel: FavouritesViewModel by lazy {
-        ViewModelProvider(this)[FavouritesViewModel::class.java]
+    private lateinit var viewModel: FavouritesViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as StarWarsApp).component
     }
 
     override fun initBinding(inflater: LayoutInflater,container: ViewGroup?,
@@ -33,10 +42,15 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel = ViewModelProvider(this, viewModelFactory)[FavouritesViewModel::class.java]
         setUpAdapter()
-
     }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
+
     private fun setUpAdapter() {
         val adapter = CharactersAdapter(requireContext())
 

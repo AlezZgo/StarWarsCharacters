@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import javax.inject.Inject
 
 @Database(entities = [CharacterInfoDbModel::class], version = 2, exportSchema = false)
-abstract class AppDatabase @Inject constructor() : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     companion object {
 
         private var db: AppDatabase? = null

@@ -3,6 +3,10 @@ package com.example.starwarscharacters.di
 import android.app.Application
 import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.data.database.CharacterDao
+import com.example.starwarscharacters.data.datasource.LocalDataSource
+import com.example.starwarscharacters.data.datasource.LocalDataSourceImpl
+import com.example.starwarscharacters.data.datasource.RemoteDataSource
+import com.example.starwarscharacters.data.datasource.RemoteDataSourceImpl
 import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.data.network.ApiService
 import com.example.starwarscharacters.data.repository.CharactersRepositoryImpl
@@ -18,6 +22,12 @@ interface DataModule {
     @Binds
     fun bindShopListRepository(impl: CharactersRepositoryImpl): CharactersRepository
 
+    @ApplicationScope
+    @Binds
+    fun bindRemoteDataSource(impl: RemoteDataSourceImpl): RemoteDataSource
+
+
+
     companion object {
 
         @ApplicationScope
@@ -26,6 +36,14 @@ interface DataModule {
             application: Application
         ): CharacterDao {
             return AppDatabase.getInstance(application).characterDao()
+        }
+
+        @ApplicationScope
+        @Provides
+        fun provideLocalDataSource(
+            application: Application
+        ): LocalDataSource {
+            return LocalDataSourceImpl(AppDatabase.getInstance(application).characterDao())
         }
 
         @Provides
