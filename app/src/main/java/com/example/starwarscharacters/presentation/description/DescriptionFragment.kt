@@ -10,21 +10,22 @@ import androidx.navigation.fragment.navArgs
 import com.example.starwarscharacters.R
 import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.presentation.BaseFragment
-import com.example.starwarscharacters.presentation.StarWarsApp
-import com.example.starwarscharacters.presentation.ViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class DescriptionFragment : BaseFragment<FragmentDescriptionBinding,DescriptionViewModel>() {
+class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, DescriptionViewModel>() {
 
     private val args by navArgs<DescriptionFragmentArgs>()
 
     override fun initBinding(
         inflater: LayoutInflater, container: ViewGroup?,
-    ): FragmentDescriptionBinding = FragmentDescriptionBinding.inflate(inflater, container, false)
+    ): FragmentDescriptionBinding = FragmentDescriptionBinding.inflate(
+        inflater,
+        container,
+        false
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

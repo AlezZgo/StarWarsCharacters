@@ -31,17 +31,14 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding,FavouritesView
         setUpAdapter()
     }
 
-    override fun onAttach(context: Context) {
-        component.inject(this)
-        super.onAttach(context)
-    }
-
     private fun setUpAdapter() {
         val adapter = CharactersAdapter()
 
         adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener {
             override fun onCharacterClick(character: CharacterInfo) {
-                launchDescriptionFragment(character)
+                findNavController().navigate(
+                    FavouritesFragmentDirections.actionNavigationFavouritesToDescriptionFragment(character)
+                )
             }
         }
         adapter.onIsFavouriteClickListener = object : CharactersAdapter.OnIsFavouriteClickListener {
@@ -56,12 +53,4 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding,FavouritesView
             adapter.submitList(it)
         }
     }
-
-    private fun launchDescriptionFragment(character: CharacterInfo) {
-        findNavController().navigate(
-            FavouritesFragmentDirections.actionNavigationFavouritesToDescriptionFragment(character)
-        )
-    }
-
-
 }

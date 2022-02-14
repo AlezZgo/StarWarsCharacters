@@ -27,7 +27,6 @@ interface ApplicationComponent {
 
     fun inject(descriptionFragment: DescriptionFragment)
 
-
     fun inject(application: StarWarsApp)
 
     @Component.Factory
