@@ -14,10 +14,6 @@ import com.example.starwarscharacters.presentation.BaseFragment
 import com.example.starwarscharacters.presentation.StarWarsApp
 import com.example.starwarscharacters.presentation.ViewModelFactory
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
@@ -48,6 +44,7 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
     }
 
     private fun setUpAdapter() {
+
         val adapter = CharactersAdapter()
 
         adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener {
@@ -57,9 +54,7 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
         }
         adapter.onIsFavouriteClickListener = object : CharactersAdapter.OnIsFavouriteClickListener {
             override fun onIsFavouriteClick(character: CharacterInfo) {
-                CoroutineScope(Dispatchers.IO + Job()).launch {
-                    viewModel.insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
-                }
+                viewModel.changeIsFavouriteStatus(character)
             }
         }
 
@@ -71,18 +66,10 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
     }
 
     private fun setFilter() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { viewModel.setFilter(it) }
-                return false
-            }
-
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                query?.let { viewModel.setFilter(it) }
-                return false
-            }
-        })
+        binding.searchView.setOnQueryTextListener(
+            QueryTextChangeListener{
+                viewModel.setFilter(it)
+            })
     }
 
 

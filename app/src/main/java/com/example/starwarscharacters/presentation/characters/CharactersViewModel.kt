@@ -8,11 +8,15 @@ import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.usecases.GetCharacterListUseCase
 import com.example.starwarscharacters.domain.usecases.InsertCharacterUseCase
 import com.example.starwarscharacters.domain.usecases.LoadDataUseCase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharactersViewModel @Inject constructor(
     private val getCharactersListUseCase: GetCharacterListUseCase,
-    private val loadDataUseCase: LoadDataUseCase,
+    loadDataUseCase: LoadDataUseCase,
     val insertCharacterUseCase: InsertCharacterUseCase,
 ) : ViewModel() {
 
@@ -32,6 +36,12 @@ class CharactersViewModel @Inject constructor(
             else -> "%$newFilter%"
         }
         this.filter.postValue(filter)
+    }
+
+    fun changeIsFavouriteStatus(character: CharacterInfo) {
+        CoroutineScope(Dispatchers.IO + Job()).launch {
+            insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
+        }
     }
 
 }
