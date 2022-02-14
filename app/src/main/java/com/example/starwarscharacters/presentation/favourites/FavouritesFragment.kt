@@ -28,6 +28,11 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding,FavouritesView
         setUpAdapter()
     }
 
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
+
     private fun setUpAdapter() {
         val adapter = CharactersAdapter()
 
