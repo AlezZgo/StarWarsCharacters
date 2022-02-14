@@ -16,16 +16,7 @@ import com.example.starwarscharacters.presentation.ViewModelFactory
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
 import javax.inject.Inject
 
-class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
-
-    private lateinit var viewModel: CharactersViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    private val component by lazy {
-        (requireActivity().application as StarWarsApp).component
-    }
+class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersViewModel>() {
 
     override fun onAttach(context: Context) {
         component.inject(this)
@@ -49,7 +40,9 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
 
         adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener {
             override fun onCharacterClick(character: CharacterInfo) {
-                launchDescriptionFragment(character)
+                findNavController().navigate(
+                    CharactersFragmentDirections.actionNavigationCharactersToDescriptionFragment(character)
+                )
             }
         }
         adapter.onIsFavouriteClickListener = object : CharactersAdapter.OnIsFavouriteClickListener {
@@ -70,13 +63,6 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
             QueryTextChangeListener{
                 viewModel.setFilter(it)
             })
-    }
-
-
-    private fun launchDescriptionFragment(character: CharacterInfo) {
-        findNavController().navigate(
-            CharactersFragmentDirections.actionNavigationCharactersToDescriptionFragment(character)
-        )
     }
 
     override fun initBinding(

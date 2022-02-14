@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 class CharactersViewModel @Inject constructor(
     private val getCharactersListUseCase: GetCharacterListUseCase,
+    private val insertCharacterUseCase: InsertCharacterUseCase,
     loadDataUseCase: LoadDataUseCase,
-    val insertCharacterUseCase: InsertCharacterUseCase,
 ) : ViewModel() {
 
     var characterList: LiveData<List<CharacterInfo>>
@@ -31,10 +31,7 @@ class CharactersViewModel @Inject constructor(
     }
 
     fun setFilter(newFilter: String) {
-        val filter = when {
-            newFilter.isEmpty() -> "%"
-            else -> "%$newFilter%"
-        }
+        val filter = if (newFilter.isEmpty()) "%" else "%$newFilter%"
         this.filter.postValue(filter)
     }
 

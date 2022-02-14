@@ -19,16 +19,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
-
-    private lateinit var viewModel: FavouritesViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    private val component by lazy {
-        (requireActivity().application as StarWarsApp).component
-    }
+class FavouritesFragment : BaseFragment<FragmentFavouritesBinding,FavouritesViewModel>() {
 
     override fun initBinding(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,9 +46,7 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
         }
         adapter.onIsFavouriteClickListener = object : CharactersAdapter.OnIsFavouriteClickListener {
             override fun onIsFavouriteClick(character: CharacterInfo) {
-                CoroutineScope(Dispatchers.IO + Job()).launch {
-                    viewModel.insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
-                }
+                viewModel.changeIsFavouriteStatus(character)
             }
         }
 
@@ -68,7 +57,7 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding>() {
         }
     }
 
-    fun launchDescriptionFragment(character: CharacterInfo) {
+    private fun launchDescriptionFragment(character: CharacterInfo) {
         findNavController().navigate(
             FavouritesFragmentDirections.actionNavigationFavouritesToDescriptionFragment(character)
         )

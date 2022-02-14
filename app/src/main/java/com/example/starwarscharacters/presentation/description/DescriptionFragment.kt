@@ -18,16 +18,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DescriptionFragment : BaseFragment<FragmentDescriptionBinding>() {
-
-    private lateinit var viewModel: DescriptionViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    private val component by lazy {
-        (requireActivity().application as StarWarsApp).component
-    }
+class DescriptionFragment : BaseFragment<FragmentDescriptionBinding,DescriptionViewModel>() {
 
     private val args by navArgs<DescriptionFragmentArgs>()
 
