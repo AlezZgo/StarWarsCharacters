@@ -8,13 +8,13 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class CharacterWorkerFactory @Inject constructor(
-    private val workerProviders: @JvmSuppressWildcards Map<Class<out ListenableWorker>, Provider<ChildWorkerFactory>>
+    private val workerProviders: @JvmSuppressWildcards Map<Class<out ListenableWorker>, Provider<ChildWorkerFactory>>,
 ) : WorkerFactory() {
 
     override fun createWorker(
         appContext: Context,
         workerClassName: String,
-        workerParameters: WorkerParameters
+        workerParameters: WorkerParameters,
     ): ListenableWorker? {
         return when (workerClassName) {
             RefreshDataWorker::class.qualifiedName -> {

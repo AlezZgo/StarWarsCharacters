@@ -48,7 +48,7 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding>() {
     }
 
     private fun setUpAdapter() {
-        val adapter = CharactersAdapter(requireContext())
+        val adapter = CharactersAdapter()
 
         adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener {
             override fun onCharacterClick(character: CharacterInfo) {

@@ -6,7 +6,7 @@ import com.example.starwarscharacters.data.workers.CharacterWorkerFactory
 import com.example.starwarscharacters.di.DaggerApplicationComponent
 import javax.inject.Inject
 
-class StarWarsApp: Application(), Configuration.Provider {
+class StarWarsApp : Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: CharacterWorkerFactory

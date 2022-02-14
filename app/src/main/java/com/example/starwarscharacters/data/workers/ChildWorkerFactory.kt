@@ -8,6 +8,6 @@ interface ChildWorkerFactory {
 
     fun create(
         context: Context,
-        workerParameters: WorkerParameters
+        workerParameters: WorkerParameters,
     ): ListenableWorker
 }

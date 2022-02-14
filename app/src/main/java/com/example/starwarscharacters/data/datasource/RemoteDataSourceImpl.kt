@@ -5,7 +5,8 @@ import com.example.starwarscharacters.data.network.ApiService
 import com.example.starwarscharacters.data.network.model.CharacterDto
 import javax.inject.Inject
 
-class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) : RemoteDataSource {
+class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) :
+    RemoteDataSource {
 
     override suspend fun getAllCharacters(): List<CharacterDto> {
         val results = mutableListOf<CharacterDto>()

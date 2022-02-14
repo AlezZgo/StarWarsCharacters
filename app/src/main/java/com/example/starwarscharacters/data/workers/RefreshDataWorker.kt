@@ -4,10 +4,8 @@ import android.content.Context
 import androidx.work.*
 import com.example.starwarscharacters.data.database.CharacterDao
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
-import com.example.starwarscharacters.data.datasource.LocalDataSource
 import com.example.starwarscharacters.data.datasource.RemoteDataSource
 import com.example.starwarscharacters.data.mapper.CharacterMapper
-import com.example.starwarscharacters.data.network.ApiService
 import javax.inject.Inject
 
 class RefreshDataWorker(
@@ -16,7 +14,7 @@ class RefreshDataWorker(
     private val remoteDataSource: RemoteDataSource,
     private val characterDao: CharacterDao,
     private val mapper: CharacterMapper,
-) : CoroutineWorker(context,workerParameters) {
+) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result {
         remoteDataSource.getAllCharacters().forEach { newCharacterDto ->
@@ -42,12 +40,12 @@ class RefreshDataWorker(
     class Factory @Inject constructor(
         private val characterDao: CharacterDao,
         private val remoteDataSource: RemoteDataSource,
-        private val mapper: CharacterMapper
+        private val mapper: CharacterMapper,
     ) : ChildWorkerFactory {
 
         override fun create(
             context: Context,
-            workerParameters: WorkerParameters
+            workerParameters: WorkerParameters,
         ): ListenableWorker {
             return RefreshDataWorker(
                 context,

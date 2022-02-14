@@ -12,7 +12,6 @@ import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.presentation.BaseFragment
 import com.example.starwarscharacters.presentation.StarWarsApp
 import com.example.starwarscharacters.presentation.ViewModelFactory
-import com.example.starwarscharacters.presentation.characters.CharactersViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

@@ -7,7 +7,7 @@ import com.example.starwarscharacters.data.network.model.CharacterDto
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import javax.inject.Inject
 
-class CharacterMapper  @Inject constructor(private val apiService: ApiService) {
+class CharacterMapper @Inject constructor(private val apiService: ApiService) {
 
     fun mapDbModelToEntity(infoDbModel: CharacterInfoDbModel) = CharacterInfo(
         name = infoDbModel.name,

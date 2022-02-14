@@ -27,13 +27,12 @@ interface DataModule {
     fun bindRemoteDataSource(impl: RemoteDataSourceImpl): RemoteDataSource
 
 
-
     companion object {
 
         @ApplicationScope
         @Provides
         fun provideCharacterListDao(
-            application: Application
+            application: Application,
         ): CharacterDao {
             return AppDatabase.getInstance(application).characterDao()
         }
@@ -41,7 +40,7 @@ interface DataModule {
         @ApplicationScope
         @Provides
         fun provideLocalDataSource(
-            application: Application
+            application: Application,
         ): LocalDataSource {
             return LocalDataSourceImpl(AppDatabase.getInstance(application).characterDao())
         }
