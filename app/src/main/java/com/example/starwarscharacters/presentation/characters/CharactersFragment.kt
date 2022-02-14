@@ -9,6 +9,7 @@ import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.starwarscharacters.databinding.FragmentCharactersBinding
+import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.presentation.BaseFragment
 import com.example.starwarscharacters.presentation.StarWarsApp
@@ -16,7 +17,8 @@ import com.example.starwarscharacters.presentation.ViewModelFactory
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
 import javax.inject.Inject
 
-class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersViewModel>() {
+class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersViewModel>(
+    FragmentCharactersBinding::inflate) {
 
     override fun onAttach(context: Context) {
         component.inject(this)
@@ -65,7 +67,4 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersVie
             })
     }
 
-    override fun initBinding(
-        inflater: LayoutInflater, container: ViewGroup?,
-    ): FragmentCharactersBinding = FragmentCharactersBinding.inflate(inflater, container, false)
 }

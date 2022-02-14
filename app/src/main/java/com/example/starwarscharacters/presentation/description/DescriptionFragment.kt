@@ -15,17 +15,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, DescriptionViewModel>() {
+class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, DescriptionViewModel>(
+    FragmentDescriptionBinding::inflate) {
 
     private val args by navArgs<DescriptionFragmentArgs>()
-
-    override fun initBinding(
-        inflater: LayoutInflater, container: ViewGroup?,
-    ): FragmentDescriptionBinding = FragmentDescriptionBinding.inflate(
-        inflater,
-        container,
-        false
-    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

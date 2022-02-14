@@ -19,11 +19,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FavouritesFragment : BaseFragment<FragmentFavouritesBinding,FavouritesViewModel>() {
-
-    override fun initBinding(
-        inflater: LayoutInflater, container: ViewGroup?,
-    ): FragmentFavouritesBinding = FragmentFavouritesBinding.inflate(inflater, container, false)
+class FavouritesFragment : BaseFragment<FragmentFavouritesBinding,FavouritesViewModel>(
+    FragmentFavouritesBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
