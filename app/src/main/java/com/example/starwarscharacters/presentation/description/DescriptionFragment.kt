@@ -23,7 +23,11 @@ class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, Description
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[DescriptionViewModel::class.java]
+        viewModel.initCharacter(args.character.name)
         initViewsContent()
+        binding.tgbIsFavourite.setOnClickListener {
+            viewModel.changeIsFavouriteStatus()
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -41,15 +45,6 @@ class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, Description
                 tvHomeWorld.text = getString(R.string.character_homeworld_template, homeWorld)
                 tvFilms.text = getString(R.string.character_films_template, films)
                 tgbIsFavourite.isChecked = isFavourite
-
-                tgbIsFavourite.setOnClickListener {
-                    CoroutineScope(Dispatchers.IO + Job()).launch {
-                        val oldObj = viewModel.getCharacterUseCase(name)
-                        val newObj = oldObj.copy(isFavourite = !oldObj.isFavourite)
-                        viewModel.insertCharacterUseCase(newObj)
-                        tgbIsFavourite.isChecked = newObj.isFavourite
-                    }
-                }
             }
         }
     }

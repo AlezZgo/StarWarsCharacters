@@ -1,6 +1,7 @@
 package com.example.starwarscharacters.data.workers
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.work.*
 import com.example.starwarscharacters.data.database.CharacterDao
 import com.example.starwarscharacters.data.database.CharacterInfoDbModel
@@ -18,13 +19,13 @@ class RefreshDataWorker(
 
     override suspend fun doWork(): Result {
         remoteDataSource.getAllCharacters().forEach { newCharacterDto ->
-            val oldCharacterDbModel: CharacterInfoDbModel? =
+            val oldCharacterDbModel: LiveData<CharacterInfoDbModel> =
                 characterDao.getCharacter(newCharacterDto.name)
             val newCharacterDbModel = mapper.mapDtoToDbModel(
-                newCharacterDto, isFavourite = oldCharacterDbModel?.isFavourite ?: false)
-            if (oldCharacterDbModel != newCharacterDbModel) {
-                characterDao.insert(newCharacterDbModel)
-            }
+                newCharacterDto, isFavourite = oldCharacterDbModel.value!!.isFavourite ?: false)
+//            if (oldCharacterDbModel != newCharacterDbModel) {
+//                characterDao.insert(newCharacterDbModel)
+//            }
         }
         return Result.success()
     }

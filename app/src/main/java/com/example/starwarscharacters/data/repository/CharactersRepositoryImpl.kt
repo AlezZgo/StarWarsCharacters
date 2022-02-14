@@ -18,8 +18,10 @@ class CharactersRepositoryImpl @Inject constructor(
     private val application: Application,
 ) : CharactersRepository {
 
-    override fun getCharacter(name: String): CharacterInfo {
-        return mapper.mapDbModelToEntity(localDataSource.getCharacter(name))
+    override fun getCharacter(name: String): LiveData<CharacterInfo> {
+        return Transformations.map(localDataSource.getCharacter(name)){
+            mapper.mapDbModelToEntity(it)
+        }
     }
 
     override fun getCharacterList(filter: String): LiveData<List<CharacterInfo>> {

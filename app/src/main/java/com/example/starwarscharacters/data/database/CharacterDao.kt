@@ -19,7 +19,7 @@ interface CharacterDao {
     fun getCharactersList(filter: String): LiveData<List<CharacterInfoDbModel>>
 
     @Query("SELECT * FROM characters WHERE name == :name LIMIT 1")
-    fun getCharacter(name: String): CharacterInfoDbModel
+    fun getCharacter(name: String): LiveData<CharacterInfoDbModel>
 
     @Query("SELECT * FROM characters WHERE isFavourite = 1 ORDER BY name ASC ")
     fun getFavouritesCharacters(): LiveData<List<CharacterInfoDbModel>>

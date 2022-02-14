@@ -21,7 +21,7 @@ class LocalDataSourceImpl @Inject constructor(
         return characterDao.getCharactersList(filter)
     }
 
-    override fun getCharacter(name: String): CharacterInfoDbModel {
+    override fun getCharacter(name: String): LiveData<CharacterInfoDbModel> {
         return characterDao.getCharacter(name)
     }
 
