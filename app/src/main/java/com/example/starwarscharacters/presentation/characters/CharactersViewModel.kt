@@ -24,7 +24,9 @@ class CharactersViewModel @Inject constructor(
     var filter = MutableLiveData("%")
 
     init {
-        refreshData()
+        CoroutineScope(Dispatchers.IO + Job()).launch {
+            refreshDataUseCase()
+        }
         characterList = Transformations.switchMap(filter) { filter ->
             getCharactersListUseCase(filter)
         }
@@ -38,13 +40,6 @@ class CharactersViewModel @Inject constructor(
     fun changeIsFavouriteStatus(character: CharacterInfo) {
         CoroutineScope(Dispatchers.IO + Job()).launch {
             insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
-        }
-    }
-
-    // todo why private methods is bad practice
-    private fun refreshData() {
-        CoroutineScope(Dispatchers.IO + Job()).launch {
-            refreshDataUseCase()
         }
     }
 
