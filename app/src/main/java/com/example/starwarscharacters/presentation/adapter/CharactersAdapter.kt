@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.starwarscharacters.databinding.ItemCharacterBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 
-class CharactersAdapter :
-    ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback()) {
-
-    var onCharacterClickListener: OnCharacterClickListener? = null
-    var onIsFavouriteClickListener: OnIsFavouriteClickListener? = null
+class CharactersAdapter(
+    private val onCharacterClickListener: OnCharacterClickListener,
+    private val onIsFavouriteClickListener: OnIsFavouriteClickListener,
+) : ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val binding = ItemCharacterBinding.inflate(

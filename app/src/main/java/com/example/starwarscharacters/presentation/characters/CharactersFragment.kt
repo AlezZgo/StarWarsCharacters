@@ -2,20 +2,13 @@ package com.example.starwarscharacters.presentation.characters
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.starwarscharacters.databinding.FragmentCharactersBinding
-import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.presentation.BaseFragment
-import com.example.starwarscharacters.presentation.StarWarsApp
-import com.example.starwarscharacters.presentation.ViewModelFactory
 import com.example.starwarscharacters.presentation.adapter.CharactersAdapter
-import javax.inject.Inject
 
 class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersViewModel>(
     FragmentCharactersBinding::inflate) {
@@ -38,20 +31,20 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersVie
 
     private fun setUpAdapter() {
 
-        val adapter = CharactersAdapter()
-
-        adapter.onCharacterClickListener = object : CharactersAdapter.OnCharacterClickListener {
-            override fun onCharacterClick(character: CharacterInfo) {
-                findNavController().navigate(
-                    CharactersFragmentDirections.actionNavigationCharactersToDescriptionFragment(character)
-                )
-            }
-        }
-        adapter.onIsFavouriteClickListener = object : CharactersAdapter.OnIsFavouriteClickListener {
-            override fun onIsFavouriteClick(character: CharacterInfo) {
-                viewModel.changeIsFavouriteStatus(character)
-            }
-        }
+        val adapter = CharactersAdapter(
+            object : CharactersAdapter.OnCharacterClickListener {
+                override fun onCharacterClick(character: CharacterInfo) {
+                    findNavController().navigate(
+                        CharactersFragmentDirections.actionNavigationCharactersToDescriptionFragment(
+                            character)
+                    )
+                }
+            },
+            object : CharactersAdapter.OnIsFavouriteClickListener {
+                override fun onIsFavouriteClick(character: CharacterInfo) {
+                    viewModel.changeIsFavouriteStatus(character)
+                }
+            })
 
         binding.rvCharacters.adapter = adapter
 
@@ -62,7 +55,7 @@ class CharactersFragment : BaseFragment<FragmentCharactersBinding, CharactersVie
 
     private fun setFilter() {
         binding.searchView.setOnQueryTextListener(
-            QueryTextChangeListener{
+            QueryTextChangeListener {
                 viewModel.setFilter(it)
             })
     }

@@ -2,7 +2,7 @@ package com.example.starwarscharacters.data.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class FilmDto(
+data class FilmCloud(
 
     @SerializedName("title") val title: String,
     @SerializedName("episode_id") val episode_id: String,

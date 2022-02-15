@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetCharacterUseCase @Inject constructor(
     private val repository: CharactersRepository,
 ) {
-    operator fun invoke(name: String): LiveData<CharacterInfo> = repository.getCharacter(name)
+    operator fun invoke(name: String): LiveData<CharacterInfo> = repository.character(name)
 }

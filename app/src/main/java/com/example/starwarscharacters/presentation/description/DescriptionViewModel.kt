@@ -28,7 +28,7 @@ class DescriptionViewModel @Inject constructor(
     fun changeIsFavouriteStatus() {
         Log.i("info",character.toString())
         CoroutineScope(Dispatchers.IO + Job()).launch {
-            insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
+            insertCharacterUseCase(character.value!!.copy(isFavourite = !character.value!!.isFavourite))
         }
     }
 

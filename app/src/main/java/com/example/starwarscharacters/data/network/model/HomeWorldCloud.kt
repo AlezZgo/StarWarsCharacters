@@ -2,7 +2,7 @@ package com.example.starwarscharacters.data.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class HomeWorldDto(
+data class HomeWorldCloud(
 
     @SerializedName("name") val name: String,
     @SerializedName("rotation_period") val rotation_period: String,

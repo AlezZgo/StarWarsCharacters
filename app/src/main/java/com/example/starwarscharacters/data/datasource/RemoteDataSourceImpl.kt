@@ -2,14 +2,14 @@ package com.example.starwarscharacters.data.datasource
 
 import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.data.network.ApiService
-import com.example.starwarscharacters.data.network.model.CharacterDto
+import com.example.starwarscharacters.data.network.model.CharacterCloud
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) :
     RemoteDataSource {
 
-    override suspend fun getAllCharacters(): List<CharacterDto> {
-        val results = mutableListOf<CharacterDto>()
+    override suspend fun getAllCharacters(): List<CharacterCloud> {
+        val results = mutableListOf<CharacterCloud>()
         var half = apiService.getHalfOfCharacters()
 
         results.addAll(half.results)

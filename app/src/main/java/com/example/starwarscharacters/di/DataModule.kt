@@ -34,7 +34,7 @@ interface DataModule {
         fun provideCharacterListDao(
             application: Application,
         ): CharacterDao {
-            return AppDatabase.getInstance(application).characterDao()
+            return AppDatabase.instance(application).characterDao()
         }
 
         @ApplicationScope
@@ -42,7 +42,7 @@ interface DataModule {
         fun provideLocalDataSource(
             application: Application,
         ): LocalDataSource {
-            return LocalDataSourceImpl(AppDatabase.getInstance(application).characterDao())
+            return LocalDataSourceImpl(AppDatabase.instance(application).characterDao())
         }
 
         @Provides
