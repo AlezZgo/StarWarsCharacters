@@ -17,30 +17,26 @@ class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, Description
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[DescriptionViewModel::class.java]
-        viewModel.initCharacter(args.character.name)
-        initViewsContent()
-        binding.tgbIsFavourite.setOnClickListener {
-            viewModel.changeIsFavouriteStatus()
+        viewModel.character(args.character).observe(viewLifecycleOwner){ currentCharacter->
+            with(binding) {
+                    tvName.text = currentCharacter.name
+                    tvGender.text = getString(R.string.character_gender_template, currentCharacter.gender)
+                    tvMass.text = getString(R.string.character_mass_template, currentCharacter.mass)
+                    tvHeight.text = getString(R.string.character_height_template, currentCharacter.height)
+                    tvHomeWorld.text = getString(R.string.character_homeworld_template, currentCharacter.homeWorld)
+                    tvFilms.text = getString(R.string.character_films_template, currentCharacter.films)
+                    tgbIsFavourite.isChecked = currentCharacter.isFavourite
+
+                    tgbIsFavourite.setOnClickListener {
+                        viewModel.changeIsFavouriteStatus(currentCharacter)
+                    }
+            }
         }
     }
 
     override fun onAttach(context: Context) {
         component.inject(this)
         super.onAttach(context)
-    }
-
-    private fun initViewsContent() {
-        with(binding) {
-            with(args.character) {
-                tvName.text = name
-                tvGender.text = getString(R.string.character_gender_template, gender)
-                tvMass.text = getString(R.string.character_mass_template, mass)
-                tvHeight.text = getString(R.string.character_height_template, height)
-                tvHomeWorld.text = getString(R.string.character_homeworld_template, homeWorld)
-                tvFilms.text = getString(R.string.character_films_template, films)
-                tgbIsFavourite.isChecked = isFavourite
-            }
-        }
     }
 
 }

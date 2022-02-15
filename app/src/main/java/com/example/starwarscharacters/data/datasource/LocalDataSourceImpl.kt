@@ -21,8 +21,12 @@ class LocalDataSourceImpl @Inject constructor(
         return characterDao.getCharactersList(filter)
     }
 
-    override fun getCharacter(name: String): LiveData<CharacterInfoDb> {
+    override fun getCharacter(name: String): CharacterInfoDb {
         return characterDao.getCharacter(name)
+    }
+
+    override fun getCharacterLiveData(name: String): LiveData<CharacterInfoDb> {
+        return characterDao.getCharacterLiveData(name)
     }
 
     override fun getFavouritesCharacters(): LiveData<List<CharacterInfoDb>> {

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 interface CharactersRepository {
-    fun character(name: String): LiveData<CharacterInfo>
+    fun character(name: String): CharacterInfo
+
+    fun characterLiveData(name: String): LiveData<CharacterInfo>
 
     fun characterList(filter: String): LiveData<List<CharacterInfo>>
 
@@ -13,4 +15,5 @@ interface CharactersRepository {
     suspend fun insert(character: CharacterInfo)
 
     suspend fun refreshData()
+
 }

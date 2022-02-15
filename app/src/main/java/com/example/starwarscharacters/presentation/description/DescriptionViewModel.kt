@@ -17,18 +17,12 @@ class DescriptionViewModel @Inject constructor(
     private val getCharacterUseCase: GetCharacterUseCase,
 ) : ViewModel() {
 
-    lateinit var character: LiveData<CharacterInfo>
+    fun character(currentCharacter: CharacterInfo) =
+        getCharacterUseCase.characterLiveData(currentCharacter.name)
 
-    fun initCharacter(name: String) {
+    fun changeIsFavouriteStatus(character: CharacterInfo) {
         CoroutineScope(Dispatchers.IO + Job()).launch {
-            character = getCharacterUseCase(name)
-        }
-    }
-
-    fun changeIsFavouriteStatus() {
-        Log.i("info", character.toString())
-        CoroutineScope(Dispatchers.IO + Job()).launch {
-            insertCharacterUseCase(character.value!!.copy(isFavourite = !character.value!!.isFavourite))
+            insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
         }
     }
 

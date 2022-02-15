@@ -11,8 +11,11 @@ interface LocalDataSource {
 
     fun getCharacters(filter: String): LiveData<List<CharacterInfoDb>>
 
-    fun getCharacter(name: String): LiveData<CharacterInfoDb>
+    fun getCharacter(name: String): CharacterInfoDb
+
+    fun getCharacterLiveData(name: String) : LiveData<CharacterInfoDb>
 
     fun getFavouritesCharacters(): LiveData<List<CharacterInfoDb>>
+
 
 }
