@@ -61,6 +61,4 @@ class CharactersRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
         }
     }
-
-
 }
