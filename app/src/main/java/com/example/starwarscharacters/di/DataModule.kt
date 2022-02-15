@@ -7,6 +7,7 @@ import com.example.starwarscharacters.data.datasource.LocalDataSource
 import com.example.starwarscharacters.data.datasource.LocalDataSourceImpl
 import com.example.starwarscharacters.data.datasource.RemoteDataSource
 import com.example.starwarscharacters.data.datasource.RemoteDataSourceImpl
+import com.example.starwarscharacters.data.mapper.CharacterMapper
 import com.example.starwarscharacters.data.repository.CharactersRepositoryImpl
 import com.example.starwarscharacters.domain.repositories.CharactersRepository
 import dagger.Binds
@@ -41,6 +42,10 @@ interface DataModule {
         ): LocalDataSource {
             return LocalDataSourceImpl(AppDatabase.instance(application).characterDao())
         }
+
+        @ApplicationScope
+        @Provides
+        fun provideCharacterMapper() = CharacterMapper()
 
     }
 }

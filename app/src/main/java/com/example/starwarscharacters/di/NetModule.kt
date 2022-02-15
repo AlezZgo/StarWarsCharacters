@@ -13,20 +13,20 @@ import javax.inject.Singleton
 class NetModule {
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor) =
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .build()
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideInterceptor() = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
     @Provides
-    @Singleton
+    @ApplicationScope
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
