@@ -40,7 +40,7 @@ class NetModule {
         return retrofit.create(ApiService::class.java)
     }
 
-    companion object{
+    companion object {
         private const val baseUrl = "https://swapi.dev/"
     }
 }

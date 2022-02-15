@@ -8,7 +8,10 @@ import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.usecases.GetCharacterListUseCase
 import com.example.starwarscharacters.domain.usecases.InsertCharacterUseCase
 import com.example.starwarscharacters.domain.usecases.RefreshDataUseCase
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharactersViewModel @Inject constructor(
@@ -39,7 +42,7 @@ class CharactersViewModel @Inject constructor(
     }
 
     // todo why private methods is bad practice
-    private fun refreshData(){
+    private fun refreshData() {
         CoroutineScope(Dispatchers.IO + Job()).launch {
             refreshDataUseCase()
         }

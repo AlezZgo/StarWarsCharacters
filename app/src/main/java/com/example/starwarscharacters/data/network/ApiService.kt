@@ -1,8 +1,8 @@
 package com.example.starwarscharacters.data.network
 
-import com.example.starwarscharacters.data.network.model.PartOfCharactersCloud
 import com.example.starwarscharacters.data.network.model.FilmCloud
 import com.example.starwarscharacters.data.network.model.HomeWorldCloud
+import com.example.starwarscharacters.data.network.model.PartOfCharactersCloud
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Url

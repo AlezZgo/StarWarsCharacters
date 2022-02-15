@@ -2,18 +2,12 @@ package com.example.starwarscharacters.presentation.description
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.starwarscharacters.R
 import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.presentation.BaseFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, DescriptionViewModel>(
     FragmentDescriptionBinding::inflate) {

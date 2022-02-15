@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import javax.inject.Inject
 
-typealias Inflate<T> = (LayoutInflater,ViewGroup?,Boolean) -> T
+typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
 abstract class BaseFragment<B : ViewBinding, V : ViewModel>(
-    private val inflate: Inflate<B>)
-    : Fragment() {
+    private val inflate: Inflate<B>,
+) : Fragment() {
 
     private var _viewBinding: B? = null
     protected val binding get() = checkNotNull(_viewBinding)
@@ -32,7 +32,7 @@ abstract class BaseFragment<B : ViewBinding, V : ViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _viewBinding = inflate.invoke(inflater,container,false)
+        _viewBinding = inflate.invoke(inflater, container, false)
         return binding.root
     }
 

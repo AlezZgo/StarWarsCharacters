@@ -15,18 +15,18 @@ import javax.inject.Inject
 class DescriptionViewModel @Inject constructor(
     private val insertCharacterUseCase: InsertCharacterUseCase,
     private val getCharacterUseCase: GetCharacterUseCase,
-) : ViewModel(){
+) : ViewModel() {
 
-    lateinit var character : LiveData<CharacterInfo>
+    lateinit var character: LiveData<CharacterInfo>
 
-    fun initCharacter(name : String){
+    fun initCharacter(name: String) {
         CoroutineScope(Dispatchers.IO + Job()).launch {
             character = getCharacterUseCase(name)
         }
     }
 
     fun changeIsFavouriteStatus() {
-        Log.i("info",character.toString())
+        Log.i("info", character.toString())
         CoroutineScope(Dispatchers.IO + Job()).launch {
             insertCharacterUseCase(character.value!!.copy(isFavourite = !character.value!!.isFavourite))
         }
