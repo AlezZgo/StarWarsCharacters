@@ -7,6 +7,8 @@ object ApiFactory {
 
     const val BASE_URL = "https://swapi.dev/"
 
+    val interceptor = HttpLoggingInterceptor()
+
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)

@@ -7,24 +7,21 @@ import androidx.lifecycle.ViewModel
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.usecases.GetCharacterListUseCase
 import com.example.starwarscharacters.domain.usecases.InsertCharacterUseCase
-import com.example.starwarscharacters.domain.usecases.LoadDataUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import com.example.starwarscharacters.domain.usecases.RefreshDataUseCase
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class CharactersViewModel @Inject constructor(
     private val getCharactersListUseCase: GetCharacterListUseCase,
     private val insertCharacterUseCase: InsertCharacterUseCase,
-    loadDataUseCase: LoadDataUseCase,
+    private val refreshDataUseCase: RefreshDataUseCase,
 ) : ViewModel() {
 
     var characterList: LiveData<List<CharacterInfo>>
     var filter = MutableLiveData("%")
 
     init {
-        loadDataUseCase()
+        refreshData()
         characterList = Transformations.switchMap(filter) { filter ->
             getCharactersListUseCase(filter)
         }
@@ -38,6 +35,13 @@ class CharactersViewModel @Inject constructor(
     fun changeIsFavouriteStatus(character: CharacterInfo) {
         CoroutineScope(Dispatchers.IO + Job()).launch {
             insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
+        }
+    }
+
+    // todo why private methods is bad practice
+    private fun refreshData(){
+        CoroutineScope(Dispatchers.IO + Job()).launch {
+            refreshDataUseCase()
         }
     }
 

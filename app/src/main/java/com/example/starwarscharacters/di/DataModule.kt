@@ -26,7 +26,6 @@ interface DataModule {
     @Binds
     fun bindRemoteDataSource(impl: RemoteDataSourceImpl): RemoteDataSource
 
-
     companion object {
 
         @ApplicationScope

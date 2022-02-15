@@ -1,13 +1,11 @@
 package com.example.starwarscharacters.data.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.work.ExistingWorkPolicy
-import androidx.work.WorkManager
+import com.example.starwarscharacters.data.database.CharacterInfoDb
 import com.example.starwarscharacters.data.datasource.LocalDataSource
+import com.example.starwarscharacters.data.datasource.RemoteDataSource
 import com.example.starwarscharacters.data.mapper.CharacterMapper
-import com.example.starwarscharacters.data.workers.RefreshDataWorker
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.repositories.CharactersRepository
 import javax.inject.Inject
@@ -15,11 +13,11 @@ import javax.inject.Inject
 class CharactersRepositoryImpl @Inject constructor(
     private val mapper: CharacterMapper,
     private val localDataSource: LocalDataSource,
-    private val application: Application,
+    private val remoteDataSource: RemoteDataSource,
 ) : CharactersRepository {
 
     override fun character(name: String): LiveData<CharacterInfo> {
-        return Transformations.map(localDataSource.getCharacter(name)){
+        return Transformations.map(localDataSource.getCharacter(name)) {
             mapper.mapDbModelToEntity(it)
         }
     }
@@ -44,13 +42,17 @@ class CharactersRepositoryImpl @Inject constructor(
         localDataSource.insert(mapper.mapEntityToDbModel(character))
     }
 
-    override fun loadData() {
-        WorkManager.getInstance(application)
-            .enqueueUniqueWork(
-                RefreshDataWorker.NAME,
-                ExistingWorkPolicy.REPLACE,
-                RefreshDataWorker.makeRequest()
-            )
+    override suspend fun refreshData() {
+
+        remoteDataSource.getAllCharacters().forEach { newCharacterCloud ->
+            val oldCharacterDb: LiveData<CharacterInfoDb> =
+                localDataSource.getCharacter(newCharacterCloud.name)
+            val newCharacterDbModel = mapper.mapDtoToDbModel(
+                newCharacterCloud, isFavourite = oldCharacterDb.value!!.isFavourite)
+            if (oldCharacterDb.value != newCharacterDbModel) {
+                localDataSource.insert(newCharacterDbModel)
+            }
+        }
     }
 
 }
