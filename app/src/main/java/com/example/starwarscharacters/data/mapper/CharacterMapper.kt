@@ -1,6 +1,6 @@
 package com.example.starwarscharacters.data.mapper
 
-import com.example.starwarscharacters.data.database.CharacterInfoDbModel
+import com.example.starwarscharacters.data.database.CharacterInfoDb
 import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.data.network.ApiService
 import com.example.starwarscharacters.data.network.model.CharacterCloud
@@ -9,18 +9,18 @@ import javax.inject.Inject
 
 class CharacterMapper @Inject constructor(private val apiService: ApiService) {
 
-    fun mapDbModelToEntity(infoDbModel: CharacterInfoDbModel) = CharacterInfo(
-        name = infoDbModel.name,
-        gender = infoDbModel.gender,
-        mass = infoDbModel.mass,
-        height = infoDbModel.height,
-        homeWorld = infoDbModel.homeWorld,
-        films = infoDbModel.films,
-        isFavourite = infoDbModel.isFavourite
+    fun mapDbModelToEntity(infoDb: CharacterInfoDb) = CharacterInfo(
+        name = infoDb.name,
+        gender = infoDb.gender,
+        mass = infoDb.mass,
+        height = infoDb.height,
+        homeWorld = infoDb.homeWorld,
+        films = infoDb.films,
+        isFavourite = infoDb.isFavourite
     )
 
     suspend fun mapDtoToDbModel(characterCloud: CharacterCloud, isFavourite: Boolean) =
-        CharacterInfoDbModel(
+        CharacterInfoDb(
             name = characterCloud.name,
             gender = characterCloud.gender,
             mass = characterCloud.mass.toString(),
@@ -34,7 +34,7 @@ class CharacterMapper @Inject constructor(private val apiService: ApiService) {
             isFavourite = isFavourite
         )
 
-    fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDbModel(
+    fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDb(
         name = CharacterInfo.name,
         gender = CharacterInfo.gender,
         mass = CharacterInfo.mass,

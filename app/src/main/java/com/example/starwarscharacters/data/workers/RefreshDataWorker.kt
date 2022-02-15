@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.work.*
 import com.example.starwarscharacters.data.database.CharacterDao
-import com.example.starwarscharacters.data.database.CharacterInfoDbModel
+import com.example.starwarscharacters.data.database.CharacterInfoDb
 import com.example.starwarscharacters.data.datasource.RemoteDataSource
 import com.example.starwarscharacters.data.mapper.CharacterMapper
 import javax.inject.Inject
@@ -19,10 +19,10 @@ class RefreshDataWorker(
 
     override suspend fun doWork(): Result {
         remoteDataSource.getAllCharacters().forEach { newCharacterDto ->
-            val oldCharacterDbModel: LiveData<CharacterInfoDbModel> =
+            val oldCharacterDb: LiveData<CharacterInfoDb> =
                 characterDao.getCharacter(newCharacterDto.name)
             val newCharacterDbModel = mapper.mapDtoToDbModel(
-                newCharacterDto, isFavourite = oldCharacterDbModel.value!!.isFavourite ?: false)
+                newCharacterDto, isFavourite = oldCharacterDb.value!!.isFavourite ?: false)
 //            if (oldCharacterDbModel != newCharacterDbModel) {
 //                characterDao.insert(newCharacterDbModel)
 //            }
