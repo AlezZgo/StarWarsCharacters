@@ -1,9 +1,7 @@
 package com.example.starwarscharacters.data.datasource
 
-import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.data.network.ApiService
 import com.example.starwarscharacters.data.network.model.CharacterCloud
-import java.lang.RuntimeException
 import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) :
@@ -16,11 +14,11 @@ class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiServic
             results.addAll(half.results)
             while (half.next != null) {
                 half =
-                    apiService.getHalfOfCharactersByUrl(half.next!!.removePrefix(ApiFactory.BASE_URL))
+                    apiService.getHalfOfCharactersByUrl(half.next!!)
                 results.addAll(half.results)
             }
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             throw RuntimeException("Cannot get info from cloud")
         }
         return results.toList()

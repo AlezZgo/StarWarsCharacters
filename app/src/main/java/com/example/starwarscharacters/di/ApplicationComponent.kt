@@ -13,9 +13,11 @@ import dagger.Component
 @Component(
     modules = [
         DataModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        NetModule::class
     ]
 )
+
 interface ApplicationComponent {
 
     fun inject(activity: MainActivity)
