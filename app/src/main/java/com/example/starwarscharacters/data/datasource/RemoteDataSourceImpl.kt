@@ -19,7 +19,7 @@ class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiServic
             }
 
         } catch (e: Exception) {
-            throw RuntimeException("Cannot get info from cloud")
+            throw RuntimeException("Can`t get All Characters")
         }
         return results.toList()
 
