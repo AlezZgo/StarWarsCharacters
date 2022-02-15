@@ -5,21 +5,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import javax.inject.Inject
 
-abstract class BaseFragment<B : ViewBinding> : Fragment() {
+typealias Inflate<T> = (LayoutInflater,ViewGroup?,Boolean) -> T
+
+abstract class BaseFragment<B : ViewBinding, V : ViewModel>(
+    private val inflate: Inflate<B>)
+    : Fragment() {
 
     private var _viewBinding: B? = null
     protected val binding get() = checkNotNull(_viewBinding)
 
-    protected abstract fun initBinding(inflater: LayoutInflater, container: ViewGroup?): B
+    protected lateinit var viewModel: V
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    protected val component by lazy {
+        (requireActivity().application as StarWarsApp).component
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _viewBinding = initBinding(inflater, container)
+        _viewBinding = inflate.invoke(inflater,container,false)
         return binding.root
     }
 

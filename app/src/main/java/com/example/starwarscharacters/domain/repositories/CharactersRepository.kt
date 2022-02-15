@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 
 interface CharactersRepository {
-    fun getCharacter(name: String): CharacterInfo
+    fun character(name: String): LiveData<CharacterInfo>
 
-    fun getCharacterList(filter: String): LiveData<List<CharacterInfo>>
+    fun characterList(filter: String): LiveData<List<CharacterInfo>>
 
-    fun getFavouritesCharacters(): LiveData<List<CharacterInfo>>
+    fun favouritesCharacters(): LiveData<List<CharacterInfo>>
 
     suspend fun insert(character: CharacterInfo)
 
-    fun loadData()
+    suspend fun refreshData()
 }

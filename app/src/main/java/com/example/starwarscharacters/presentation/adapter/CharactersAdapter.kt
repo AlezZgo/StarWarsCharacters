@@ -1,19 +1,15 @@
 package com.example.starwarscharacters.presentation.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.starwarscharacters.databinding.ItemCharacterBinding
 import com.example.starwarscharacters.domain.entities.CharacterInfo
-import javax.inject.Inject
 
-class CharactersAdapter @Inject constructor(
-    private val context: Context,
+class CharactersAdapter(
+    private val onCharacterClickListener: OnCharacterClickListener,
+    private val onIsFavouriteClickListener: OnIsFavouriteClickListener,
 ) : ListAdapter<CharacterInfo, CharacterViewHolder>(CharacterInfoDiffCallback()) {
-
-    var onCharacterClickListener: OnCharacterClickListener? = null
-    var onIsFavouriteClickListener: OnIsFavouriteClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val binding = ItemCharacterBinding.inflate(
@@ -26,20 +22,7 @@ class CharactersAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = getItem(position)
-        with(holder.binding) {
-            with(character) {
-                tvItemName.text = name
-                tgbFav.isChecked = isFavourite
-
-                tgbFav.setOnClickListener {
-                    onIsFavouriteClickListener?.onIsFavouriteClick(this)
-                }
-
-                root.setOnClickListener {
-                    onCharacterClickListener?.onCharacterClick(this)
-                }
-            }
-        }
+        holder.bind(character, onCharacterClickListener, onIsFavouriteClickListener)
     }
 
     interface OnCharacterClickListener {
@@ -49,24 +32,5 @@ class CharactersAdapter @Inject constructor(
     interface OnIsFavouriteClickListener {
         fun onIsFavouriteClick(character: CharacterInfo)
     }
-
-//    interface OnFilter{
-//        fun filter
-//    }
-
-//    override fun getFilter(): Filter {
-//        return FilterImpl
-//    }
-//
-//    object FilterImpl : Filter() {
-//        override fun performFiltering(p0: CharSequence?): FilterResults {
-//            TODO("Not yet implemented")
-//        }
-//
-//        override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-//            TODO("Not yet implemented")
-//        }
-//    }
-
 
 }

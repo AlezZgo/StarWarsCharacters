@@ -1,8 +1,8 @@
 package com.example.starwarscharacters.data.network
 
-import com.example.starwarscharacters.data.network.model.CharacterHalfListDto
-import com.example.starwarscharacters.data.network.model.FilmDto
-import com.example.starwarscharacters.data.network.model.HomeWorldDto
+import com.example.starwarscharacters.data.network.model.PartOfCharactersCloud
+import com.example.starwarscharacters.data.network.model.FilmCloud
+import com.example.starwarscharacters.data.network.model.HomeWorldCloud
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Url
@@ -10,15 +10,15 @@ import retrofit2.http.Url
 interface ApiService {
 
     @GET("api/people")
-    suspend fun getHalfOfCharacters(): CharacterHalfListDto
+    suspend fun getHalfOfCharacters(): PartOfCharactersCloud
 
     @GET
-    suspend fun getHalfOfCharactersByUrl(@Url url: String): CharacterHalfListDto
+    suspend fun getHalfOfCharactersByUrl(@Url url: String): PartOfCharactersCloud
 
     @GET("{url}")
-    suspend fun getCharacterFilm(@Path("url") url: String): FilmDto
+    suspend fun getCharacterFilm(@Path("url") url: String): FilmCloud
 
     @GET("{url}")
-    suspend fun getCharacterHomeWorld(@Path("url") url: String): HomeWorldDto
+    suspend fun getCharacterHomeWorld(@Path("url") url: String): HomeWorldCloud
 
 }

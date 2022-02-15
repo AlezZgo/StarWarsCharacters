@@ -7,31 +7,42 @@ import androidx.lifecycle.ViewModel
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.usecases.GetCharacterListUseCase
 import com.example.starwarscharacters.domain.usecases.InsertCharacterUseCase
-import com.example.starwarscharacters.domain.usecases.LoadDataUseCase
+import com.example.starwarscharacters.domain.usecases.RefreshDataUseCase
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class CharactersViewModel @Inject constructor(
     private val getCharactersListUseCase: GetCharacterListUseCase,
-    private val loadDataUseCase: LoadDataUseCase,
-    val insertCharacterUseCase: InsertCharacterUseCase,
+    private val insertCharacterUseCase: InsertCharacterUseCase,
+    private val refreshDataUseCase: RefreshDataUseCase,
 ) : ViewModel() {
 
     var characterList: LiveData<List<CharacterInfo>>
     var filter = MutableLiveData("%")
 
     init {
-        loadDataUseCase()
+        refreshData()
         characterList = Transformations.switchMap(filter) { filter ->
             getCharactersListUseCase(filter)
         }
     }
 
     fun setFilter(newFilter: String) {
-        val filter = when {
-            newFilter.isEmpty() -> "%"
-            else -> "%$newFilter%"
-        }
+        val filter = if (newFilter.isEmpty()) "%" else "%$newFilter%"
         this.filter.postValue(filter)
+    }
+
+    fun changeIsFavouriteStatus(character: CharacterInfo) {
+        CoroutineScope(Dispatchers.IO + Job()).launch {
+            insertCharacterUseCase(character.copy(isFavourite = !character.isFavourite))
+        }
+    }
+
+    // todo why private methods is bad practice
+    private fun refreshData(){
+        CoroutineScope(Dispatchers.IO + Job()).launch {
+            refreshDataUseCase()
+        }
     }
 
 }

@@ -1,40 +1,40 @@
 package com.example.starwarscharacters.data.mapper
 
-import com.example.starwarscharacters.data.database.CharacterInfoDbModel
+import com.example.starwarscharacters.data.database.CharacterInfoDb
 import com.example.starwarscharacters.data.network.ApiFactory
 import com.example.starwarscharacters.data.network.ApiService
-import com.example.starwarscharacters.data.network.model.CharacterDto
+import com.example.starwarscharacters.data.network.model.CharacterCloud
 import com.example.starwarscharacters.domain.entities.CharacterInfo
 import javax.inject.Inject
 
-class CharacterMapper  @Inject constructor(private val apiService: ApiService) {
+class CharacterMapper @Inject constructor(private val apiService: ApiService) {
 
-    fun mapDbModelToEntity(infoDbModel: CharacterInfoDbModel) = CharacterInfo(
-        name = infoDbModel.name,
-        gender = infoDbModel.gender,
-        mass = infoDbModel.mass,
-        height = infoDbModel.height,
-        homeWorld = infoDbModel.homeWorld,
-        films = infoDbModel.films,
-        isFavourite = infoDbModel.isFavourite
+    fun mapDbModelToEntity(infoDb: CharacterInfoDb) = CharacterInfo(
+        name = infoDb.name,
+        gender = infoDb.gender,
+        mass = infoDb.mass,
+        height = infoDb.height,
+        homeWorld = infoDb.homeWorld,
+        films = infoDb.films,
+        isFavourite = infoDb.isFavourite
     )
 
-    suspend fun mapDtoToDbModel(characterDto: CharacterDto, isFavourite: Boolean) =
-        CharacterInfoDbModel(
-            name = characterDto.name,
-            gender = characterDto.gender,
-            mass = characterDto.mass.toString(),
-            height = characterDto.height.toString(),
+    suspend fun mapDtoToDbModel(characterCloud: CharacterCloud, isFavourite: Boolean) =
+        CharacterInfoDb(
+            name = characterCloud.name,
+            gender = characterCloud.gender,
+            mass = characterCloud.mass.toString(),
+            height = characterCloud.height.toString(),
             homeWorld = apiService.getCharacterHomeWorld(
-                characterDto.homeworld.removePrefix(ApiFactory.BASE_URL)).name,
-            films = characterDto.films.map {
+                characterCloud.homeworld.removePrefix(ApiFactory.BASE_URL)).name,
+            films = characterCloud.films.map {
                 apiService.getCharacterFilm(
                     (it.removePrefix(ApiFactory.BASE_URL))).title
             }.joinToString(separator = ","),
             isFavourite = isFavourite
         )
 
-    fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDbModel(
+    fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDb(
         name = CharacterInfo.name,
         gender = CharacterInfo.gender,
         mass = CharacterInfo.mass,

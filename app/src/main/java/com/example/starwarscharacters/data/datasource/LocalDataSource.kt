@@ -1,18 +1,18 @@
 package com.example.starwarscharacters.data.datasource
 
 import androidx.lifecycle.LiveData
-import com.example.starwarscharacters.data.database.CharacterInfoDbModel
+import com.example.starwarscharacters.data.database.CharacterInfoDb
 
 interface LocalDataSource {
 
-    suspend fun insertList(list: List<CharacterInfoDbModel>)
+    suspend fun insertList(list: List<CharacterInfoDb>)
 
-    suspend fun insert(character: CharacterInfoDbModel)
+    suspend fun insert(character: CharacterInfoDb)
 
-    fun getCharacters(filter: String): LiveData<List<CharacterInfoDbModel>>
+    fun getCharacters(filter: String): LiveData<List<CharacterInfoDb>>
 
-    fun getCharacter(name: String): CharacterInfoDbModel
+    fun getCharacter(name: String): LiveData<CharacterInfoDb>
 
-    fun getFavouritesCharacters(): LiveData<List<CharacterInfoDbModel>>
+    fun getFavouritesCharacters(): LiveData<List<CharacterInfoDb>>
 
 }

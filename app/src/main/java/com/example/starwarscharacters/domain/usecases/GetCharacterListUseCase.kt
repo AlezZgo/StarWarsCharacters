@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetCharacterListUseCase @Inject constructor(
     private val repository: CharactersRepository,
 ) {
-    operator fun invoke(filter: String) = repository.getCharacterList(filter)
+    operator fun invoke(filter: String) = repository.characterList(filter)
 }

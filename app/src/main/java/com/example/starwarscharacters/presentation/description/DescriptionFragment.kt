@@ -10,36 +10,24 @@ import androidx.navigation.fragment.navArgs
 import com.example.starwarscharacters.R
 import com.example.starwarscharacters.databinding.FragmentDescriptionBinding
 import com.example.starwarscharacters.presentation.BaseFragment
-import com.example.starwarscharacters.presentation.StarWarsApp
-import com.example.starwarscharacters.presentation.ViewModelFactory
-import com.example.starwarscharacters.presentation.characters.CharactersViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class DescriptionFragment : BaseFragment<FragmentDescriptionBinding>() {
-
-    private lateinit var viewModel: DescriptionViewModel
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    private val component by lazy {
-        (requireActivity().application as StarWarsApp).component
-    }
+class DescriptionFragment : BaseFragment<FragmentDescriptionBinding, DescriptionViewModel>(
+    FragmentDescriptionBinding::inflate) {
 
     private val args by navArgs<DescriptionFragmentArgs>()
-
-    override fun initBinding(
-        inflater: LayoutInflater, container: ViewGroup?,
-    ): FragmentDescriptionBinding = FragmentDescriptionBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory)[DescriptionViewModel::class.java]
+        viewModel.initCharacter(args.character.name)
         initViewsContent()
+        binding.tgbIsFavourite.setOnClickListener {
+            viewModel.changeIsFavouriteStatus()
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -57,15 +45,6 @@ class DescriptionFragment : BaseFragment<FragmentDescriptionBinding>() {
                 tvHomeWorld.text = getString(R.string.character_homeworld_template, homeWorld)
                 tvFilms.text = getString(R.string.character_films_template, films)
                 tgbIsFavourite.isChecked = isFavourite
-
-                tgbIsFavourite.setOnClickListener {
-                    CoroutineScope(Dispatchers.IO + Job()).launch {
-                        val oldObj = viewModel.getCharacterUseCase(name)
-                        val newObj = oldObj.copy(isFavourite = !oldObj.isFavourite)
-                        viewModel.insertCharacterUseCase(newObj)
-                        tgbIsFavourite.isChecked = newObj.isFavourite
-                    }
-                }
             }
         }
     }

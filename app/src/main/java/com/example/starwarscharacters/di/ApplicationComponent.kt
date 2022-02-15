@@ -14,9 +14,10 @@ import dagger.Component
     modules = [
         DataModule::class,
         ViewModelModule::class,
-        WorkerModule::class
+        NetModule::class
     ]
 )
+
 interface ApplicationComponent {
 
     fun inject(activity: MainActivity)
@@ -26,7 +27,6 @@ interface ApplicationComponent {
     fun inject(favouritesFragment: FavouritesFragment)
 
     fun inject(descriptionFragment: DescriptionFragment)
-
 
     fun inject(application: StarWarsApp)
 

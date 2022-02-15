@@ -7,8 +7,6 @@ import com.example.starwarscharacters.data.datasource.LocalDataSource
 import com.example.starwarscharacters.data.datasource.LocalDataSourceImpl
 import com.example.starwarscharacters.data.datasource.RemoteDataSource
 import com.example.starwarscharacters.data.datasource.RemoteDataSourceImpl
-import com.example.starwarscharacters.data.network.ApiFactory
-import com.example.starwarscharacters.data.network.ApiService
 import com.example.starwarscharacters.data.repository.CharactersRepositoryImpl
 import com.example.starwarscharacters.domain.repositories.CharactersRepository
 import dagger.Binds
@@ -26,30 +24,23 @@ interface DataModule {
     @Binds
     fun bindRemoteDataSource(impl: RemoteDataSourceImpl): RemoteDataSource
 
-
-
     companion object {
 
         @ApplicationScope
         @Provides
         fun provideCharacterListDao(
-            application: Application
+            application: Application,
         ): CharacterDao {
-            return AppDatabase.getInstance(application).characterDao()
+            return AppDatabase.instance(application).characterDao()
         }
 
         @ApplicationScope
         @Provides
         fun provideLocalDataSource(
-            application: Application
+            application: Application,
         ): LocalDataSource {
-            return LocalDataSourceImpl(AppDatabase.getInstance(application).characterDao())
+            return LocalDataSourceImpl(AppDatabase.instance(application).characterDao())
         }
 
-        @Provides
-        @ApplicationScope
-        fun provideApiService(): ApiService {
-            return ApiFactory.apiService
-        }
     }
 }
