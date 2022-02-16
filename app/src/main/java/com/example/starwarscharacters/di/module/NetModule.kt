@@ -1,13 +1,13 @@
-package com.example.starwarscharacters.di
+package com.example.starwarscharacters.di.module
 
 import com.example.starwarscharacters.data.network.ApiService
+import com.example.starwarscharacters.di.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 class NetModule {

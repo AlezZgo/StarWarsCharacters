@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class BaseRemoteDataSource @Inject constructor(private val apiService: ApiService) :
     RemoteDataSource {
-    //todo get base url to class params
+
     override suspend fun getAllCharacters(): List<CharacterCloud> {
         val results = mutableListOf<CharacterCloud>()
         try {

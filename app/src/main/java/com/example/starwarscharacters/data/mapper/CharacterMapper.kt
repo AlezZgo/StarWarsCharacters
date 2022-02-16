@@ -22,14 +22,14 @@ class CharacterMapper {
         homeWorld: String,
         films: String,
     ) = CharacterInfoDb(
-            name = characterCloud.name,
-            gender = characterCloud.gender,
-            mass = characterCloud.mass,
-            height = characterCloud.height,
-            homeWorld = homeWorld,
-            films = films,
-            isFavourite = isFavourite
-        )
+        name = characterCloud.name,
+        gender = characterCloud.gender,
+        mass = characterCloud.mass,
+        height = characterCloud.height,
+        homeWorld = homeWorld,
+        films = films,
+        isFavourite = isFavourite
+    )
 
     fun mapEntityToDbModel(CharacterInfo: CharacterInfo) = CharacterInfoDb(
         name = CharacterInfo.name,

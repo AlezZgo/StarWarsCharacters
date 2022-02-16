@@ -3,7 +3,6 @@ package com.example.starwarscharacters.data.datasource
 import com.example.starwarscharacters.data.network.model.CharacterCloud
 import com.example.starwarscharacters.data.network.model.FilmCloud
 import com.example.starwarscharacters.data.network.model.HomeWorldCloud
-import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RemoteDataSource {

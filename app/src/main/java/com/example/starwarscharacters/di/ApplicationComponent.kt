@@ -1,6 +1,9 @@
 package com.example.starwarscharacters.di
 
 import android.app.Application
+import com.example.starwarscharacters.di.module.DataModule
+import com.example.starwarscharacters.di.module.NetModule
+import com.example.starwarscharacters.di.module.ViewModelModule
 import com.example.starwarscharacters.presentation.MainActivity
 import com.example.starwarscharacters.presentation.StarWarsApp
 import com.example.starwarscharacters.presentation.characters.CharactersFragment

@@ -1,6 +1,7 @@
-package com.example.starwarscharacters.di
+package com.example.starwarscharacters.di.module
 
 import androidx.lifecycle.ViewModel
+import com.example.starwarscharacters.di.ViewModelKey
 import com.example.starwarscharacters.presentation.characters.CharactersViewModel
 import com.example.starwarscharacters.presentation.description.DescriptionViewModel
 import com.example.starwarscharacters.presentation.favourites.FavouritesViewModel

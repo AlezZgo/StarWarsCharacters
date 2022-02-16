@@ -28,5 +28,4 @@ interface CharacterDao {
     fun getFavouritesCharacters(): LiveData<List<CharacterInfoDb>>
 
 
-
 }
