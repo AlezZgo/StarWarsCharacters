@@ -40,7 +40,7 @@ class FavouritesFragment : BaseFragment<FragmentFavouritesBinding, FavouritesVie
                 }
             })
 
-        binding.rvFavourites.adapter = adapter
+        binding.favouritesRecyclerview.adapter = adapter
 
         viewModel.favouriteCharacterList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
