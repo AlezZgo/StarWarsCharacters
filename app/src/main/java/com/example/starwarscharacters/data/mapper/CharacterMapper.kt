@@ -3,7 +3,6 @@ package com.example.starwarscharacters.data.mapper
 import com.example.starwarscharacters.data.database.CharacterInfoDb
 import com.example.starwarscharacters.data.network.model.CharacterCloud
 import com.example.starwarscharacters.domain.entities.CharacterInfo
-import javax.inject.Inject
 
 class CharacterMapper {
 
@@ -17,8 +16,12 @@ class CharacterMapper {
         isFavourite = infoDb.isFavourite
     )
 
-    fun mapDtoToDbModel(characterCloud: CharacterCloud, isFavourite: Boolean) =
-        CharacterInfoDb(
+    fun mapCloudToDbModel(
+        characterCloud: CharacterCloud,
+        isFavourite: Boolean,
+        homeWorld: String,
+        films: String,
+    ) = CharacterInfoDb(
             name = characterCloud.name,
             gender = characterCloud.gender,
             mass = characterCloud.mass,

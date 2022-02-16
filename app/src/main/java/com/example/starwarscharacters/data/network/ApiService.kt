@@ -10,7 +10,7 @@ import retrofit2.http.Url
 interface ApiService {
 
     @GET("api/people")
-    suspend fun getHalfOfCharacters(): PartOfCharactersCloud
+    suspend fun getPartOfCharacters(): PartOfCharactersCloud
 
     @GET
     suspend fun getHalfOfCharactersByUrl(@Url url: String): PartOfCharactersCloud

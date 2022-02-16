@@ -53,8 +53,21 @@ class CharactersRepositoryImpl @Inject constructor(
             remoteDataSource.getAllCharacters().forEach { newCharacterCloud ->
                 val oldCharacterDb: CharacterInfoDb? =
                     localDataSource.getCharacter(newCharacterCloud.name)
-                val newCharacterDbModel = mapper.mapDtoToDbModel(
-                    newCharacterCloud, oldCharacterDb?.isFavourite ?: false)
+
+                val films = newCharacterCloud.films.map {
+                    remoteDataSource.getCharacterFilm(it)
+                }.joinToString(separator = ",")
+
+                val homeWorldName =
+                    remoteDataSource.getCharacterHomeWorld(newCharacterCloud.homeworld).name
+
+                val newCharacterDbModel = mapper.mapCloudToDbModel(
+                    newCharacterCloud,
+                    oldCharacterDb?.isFavourite ?: false,
+                    homeWorldName,
+                    films
+                )
+
                 localDataSource.insert(newCharacterDbModel)
 
             }
