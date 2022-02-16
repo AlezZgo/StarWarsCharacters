@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:layout_margin="8dp">
+    android:layout_height="@dimen/medium_item_height"
+    android:layout_margin="@dimen/medium_margin">
 
     <TextView
         android:id="@+id/tv_item_name"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="8dp"
-        android:textColor="#121212"
-        android:textSize="20sp"
+        android:padding="@dimen/medium_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tgbFav"
@@ -22,17 +22,18 @@
 
     <ImageView
         android:id="@+id/iv_item"
-        android:layout_width="48dp"
+        android:layout_width="@dimen/medium_item_height"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_character" />
+        app:srcCompat="@drawable/ic_character"
+        android:contentDescription="@string/icon_of_character" />
 
     <ToggleButton
         android:id="@+id/tgbFav"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/medium_item_height"
+        android:layout_height="@dimen/medium_item_height"
         android:background="@drawable/tb_item_favourite"
         android:focusable="false"
         android:focusableInTouchMode="false"
