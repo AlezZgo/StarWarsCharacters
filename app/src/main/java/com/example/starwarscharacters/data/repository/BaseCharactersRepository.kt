@@ -10,7 +10,7 @@ import com.example.starwarscharacters.domain.entities.CharacterInfo
 import com.example.starwarscharacters.domain.repositories.CharactersRepository
 import javax.inject.Inject
 
-class CharactersRepositoryImpl @Inject constructor(
+class BaseCharactersRepository @Inject constructor(
     private val mapper: CharacterMapper,
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
@@ -49,7 +49,7 @@ class CharactersRepositoryImpl @Inject constructor(
 
     override suspend fun refreshData() {
 
-        try {
+        kotlin.runCatching {
             remoteDataSource.getAllCharacters().forEach { newCharacterCloud ->
                 val oldCharacterDb: CharacterInfoDb? =
                     localDataSource.getCharacter(newCharacterCloud.name)
@@ -67,11 +67,8 @@ class CharactersRepositoryImpl @Inject constructor(
                     homeWorldName,
                     films
                 )
-
                 localDataSource.insert(newCharacterDbModel)
-
             }
-        } catch (e: Exception) {
         }
     }
 }

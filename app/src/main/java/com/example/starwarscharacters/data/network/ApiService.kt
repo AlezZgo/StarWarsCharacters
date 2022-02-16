@@ -13,7 +13,7 @@ interface ApiService {
     suspend fun getPartOfCharacters(): PartOfCharactersCloud
 
     @GET
-    suspend fun getHalfOfCharactersByUrl(@Url url: String): PartOfCharactersCloud
+    suspend fun getPartOfCharactersByUrl(@Url url: String): PartOfCharactersCloud
 
     @GET
     suspend fun getCharacterFilm(@Url url: String): FilmCloud

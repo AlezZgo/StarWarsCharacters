@@ -4,11 +4,11 @@ import android.app.Application
 import com.example.starwarscharacters.data.database.AppDatabase
 import com.example.starwarscharacters.data.database.CharacterDao
 import com.example.starwarscharacters.data.datasource.LocalDataSource
-import com.example.starwarscharacters.data.datasource.LocalDataSourceImpl
+import com.example.starwarscharacters.data.datasource.BaseLocalDataSource
 import com.example.starwarscharacters.data.datasource.RemoteDataSource
-import com.example.starwarscharacters.data.datasource.RemoteDataSourceImpl
+import com.example.starwarscharacters.data.datasource.BaseRemoteDataSource
 import com.example.starwarscharacters.data.mapper.CharacterMapper
-import com.example.starwarscharacters.data.repository.CharactersRepositoryImpl
+import com.example.starwarscharacters.data.repository.BaseCharactersRepository
 import com.example.starwarscharacters.domain.repositories.CharactersRepository
 import dagger.Binds
 import dagger.Module
@@ -19,11 +19,11 @@ interface DataModule {
 
     @ApplicationScope
     @Binds
-    fun bindShopListRepository(impl: CharactersRepositoryImpl): CharactersRepository
+    fun bindShopListRepository(impl: BaseCharactersRepository): CharactersRepository
 
     @ApplicationScope
     @Binds
-    fun bindRemoteDataSource(impl: RemoteDataSourceImpl): RemoteDataSource
+    fun bindRemoteDataSource(impl: BaseRemoteDataSource): RemoteDataSource
 
     companion object {
 
@@ -40,7 +40,7 @@ interface DataModule {
         fun provideLocalDataSource(
             application: Application,
         ): LocalDataSource {
-            return LocalDataSourceImpl(AppDatabase.instance(application).characterDao())
+            return BaseLocalDataSource(AppDatabase.instance(application).characterDao())
         }
 
         @ApplicationScope

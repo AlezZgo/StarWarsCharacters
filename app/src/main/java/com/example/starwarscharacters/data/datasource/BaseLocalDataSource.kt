@@ -5,7 +5,7 @@ import com.example.starwarscharacters.data.database.CharacterDao
 import com.example.starwarscharacters.data.database.CharacterInfoDb
 import javax.inject.Inject
 
-class LocalDataSourceImpl @Inject constructor(
+class BaseLocalDataSource @Inject constructor(
     private val characterDao: CharacterDao,
 ) : LocalDataSource {
 

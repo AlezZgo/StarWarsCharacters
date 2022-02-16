@@ -6,7 +6,7 @@ import com.example.starwarscharacters.data.network.model.FilmCloud
 import com.example.starwarscharacters.data.network.model.HomeWorldCloud
 import javax.inject.Inject
 
-class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) :
+class BaseRemoteDataSource @Inject constructor(private val apiService: ApiService) :
     RemoteDataSource {
     //todo get base url to class params
     override suspend fun getAllCharacters(): List<CharacterCloud> {
@@ -16,7 +16,7 @@ class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiServic
             results.addAll(half.results)
             while (half.next != null) {
                 half =
-                    apiService.getHalfOfCharactersByUrl(half.next!!)
+                    apiService.getPartOfCharactersByUrl(half.next!!)
                 results.addAll(half.results)
             }
 
