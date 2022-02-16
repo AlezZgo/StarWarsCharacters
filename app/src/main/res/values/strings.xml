@@ -9,5 +9,7 @@
     <string name="character_height_template">Height: %s cm</string>
     <string name="character_homeworld_template">HomeWorld: %s</string>
     <string name="character_films_template">Films: %s</string>
+    <string name="type_here_to_filter">type here to filter</string>
+    <string name="empty" />
 
 </resources>
