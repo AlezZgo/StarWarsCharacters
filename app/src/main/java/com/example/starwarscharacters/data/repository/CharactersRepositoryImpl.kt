@@ -55,7 +55,7 @@ class CharactersRepositoryImpl @Inject constructor(
                     localDataSource.getCharacter(newCharacterCloud.name)
 
                 val films = newCharacterCloud.films.map {
-                    remoteDataSource.getCharacterFilm(it)
+                    remoteDataSource.getCharacterFilm(it).title
                 }.joinToString(separator = ",")
 
                 val homeWorldName =

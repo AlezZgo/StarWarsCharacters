@@ -26,8 +26,8 @@ class CharacterMapper {
             gender = characterCloud.gender,
             mass = characterCloud.mass,
             height = characterCloud.height,
-            homeWorld = "",
-            films = "",
+            homeWorld = homeWorld,
+            films = films,
             isFavourite = isFavourite
         )
 

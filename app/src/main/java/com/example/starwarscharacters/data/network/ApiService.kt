@@ -15,10 +15,10 @@ interface ApiService {
     @GET
     suspend fun getHalfOfCharactersByUrl(@Url url: String): PartOfCharactersCloud
 
-    @GET("{url}")
-    suspend fun getCharacterFilm(@Path("url") url: String): FilmCloud
+    @GET
+    suspend fun getCharacterFilm(@Url url: String): FilmCloud
 
-    @GET("{url}")
-    suspend fun getCharacterHomeWorld(@Path("url") url: String): HomeWorldCloud
+    @GET
+    suspend fun getCharacterHomeWorld(@Url url: String): HomeWorldCloud
 
 }
