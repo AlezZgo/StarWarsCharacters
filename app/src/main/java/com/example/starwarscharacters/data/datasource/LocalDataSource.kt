@@ -5,6 +5,8 @@ import com.example.starwarscharacters.data.database.CharacterInfoDb
 
 interface LocalDataSource {
 
+    suspend fun cacheIsEmpty(): Boolean
+
     suspend fun insertList(list: List<CharacterInfoDb>)
 
     suspend fun insert(character: CharacterInfoDb)
@@ -15,7 +17,7 @@ interface LocalDataSource {
 
     fun getCharacterLiveData(name: String): LiveData<CharacterInfoDb>
 
-    fun getFavouritesCharacters(): LiveData<List<CharacterInfoDb>>
+    fun getFavouriteCharacters(): LiveData<List<CharacterInfoDb>>
 
 
 }

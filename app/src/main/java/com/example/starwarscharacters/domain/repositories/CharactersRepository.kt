@@ -14,6 +14,6 @@ interface CharactersRepository {
 
     suspend fun insert(character: CharacterInfo)
 
-    suspend fun refreshData()
+    suspend fun loadDataIfEmpty()
 
 }

@@ -36,7 +36,7 @@ class BaseCharactersRepository @Inject constructor(
     }
 
     override fun favouritesCharacters(): LiveData<List<CharacterInfo>> {
-        return Transformations.map(localDataSource.getFavouritesCharacters()) { list ->
+        return Transformations.map(localDataSource.getFavouriteCharacters()) { list ->
             list.map {
                 mapper.mapDbModelToEntity(it)
             }
@@ -47,9 +47,10 @@ class BaseCharactersRepository @Inject constructor(
         localDataSource.insert(mapper.mapEntityToDbModel(character))
     }
 
-    override suspend fun refreshData() {
+    override suspend fun loadDataIfEmpty() {
 
-        kotlin.runCatching {
+        if (localDataSource.cacheIsEmpty()) {
+
             remoteDataSource.getAllCharacters().forEach { newCharacterCloud ->
                 val oldCharacterDb: CharacterInfoDb? =
                     localDataSource.getCharacter(newCharacterCloud.name)
@@ -70,5 +71,6 @@ class BaseCharactersRepository @Inject constructor(
                 localDataSource.insert(newCharacterDbModel)
             }
         }
+
     }
 }

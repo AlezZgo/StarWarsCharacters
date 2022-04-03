@@ -27,5 +27,8 @@ interface CharacterDao {
     @Query("SELECT * FROM characters WHERE isFavourite = 1 ORDER BY name ASC ")
     fun getFavouritesCharacters(): LiveData<List<CharacterInfoDb>>
 
+    @Query("SELECT COUNT(*) FROM characters ")
+    suspend fun count(): Int
+
 
 }

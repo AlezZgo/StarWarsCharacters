@@ -6,5 +6,5 @@ import javax.inject.Inject
 class RefreshDataUseCase @Inject constructor(
     private val repository: CharactersRepository,
 ) {
-    suspend operator fun invoke() = repository.refreshData()
+    suspend operator fun invoke() = repository.loadDataIfEmpty()
 }

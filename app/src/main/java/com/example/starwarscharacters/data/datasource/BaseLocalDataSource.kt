@@ -8,6 +8,9 @@ import javax.inject.Inject
 class BaseLocalDataSource @Inject constructor(
     private val characterDao: CharacterDao,
 ) : LocalDataSource {
+    override suspend fun cacheIsEmpty(): Boolean {
+        return characterDao.count() <= 0
+    }
 
     override suspend fun insertList(list: List<CharacterInfoDb>) {
         characterDao.insertList(list)
@@ -29,7 +32,7 @@ class BaseLocalDataSource @Inject constructor(
         return characterDao.getCharacterLiveData(name)
     }
 
-    override fun getFavouritesCharacters(): LiveData<List<CharacterInfoDb>> {
+    override fun getFavouriteCharacters(): LiveData<List<CharacterInfoDb>> {
         return characterDao.getFavouritesCharacters()
     }
 }
